@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,18 +121,11 @@ nav {
   color: var(--ink);
   text-decoration: none;
 }
-.nav-logo .cross {
-  width: clamp(28px, 2.5vw, 32px); 
-  height: clamp(28px, 2.5vw, 32px);
-  background: var(--gradient);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 18px;
-  font-weight: 900;
-  transform: rotate(-5deg);
+
+.nav-logo-img {
+  height: clamp(28px, 4vw, 40px);
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -1216,6 +1208,12 @@ footer {
   color: var(--cream);
   margin-bottom: 20px;
 }
+
+/* Make logo white on dark footer if it's a dark SVG */
+.footer-logo-img {
+  filter: brightness(0) invert(1);
+}
+
 .footer-brand p {
   font-size: 14px;
   color: rgba(247, 255, 249, 0.6);
@@ -1437,10 +1435,8 @@ footer {
   .nav-logo {
     font-size: 1rem;
   }
-  .nav-logo .cross {
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
+  .nav-logo-img {
+    height: 28px;
   }
   .nav-cta {
     padding: 8px 14px;
@@ -1597,8 +1593,7 @@ footer {
 
 <nav>
   <a href="#" class="nav-logo">
-    <span class="cross">+</span>
-    Clinically
+    <img src="logo.svg" alt="Clinically" class="nav-logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="#what">What We Do</a></li>
@@ -2128,8 +2123,7 @@ footer {
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="nav-logo">
-          <span class="cross">+</span>
-          Clinically
+          <img src="logo.svg" alt="Clinically" class="nav-logo-img footer-logo-img">
         </a>
         <p>A youth-led initiative bringing premed education into classrooms — making the path to medicine clear, honest, and possible for every student.</p>
         <div class="footer-social">
