@@ -3,1307 +3,1054 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clinically — Bringing Premed Education to Metro Detroit Classrooms</title>
+<title>Clinically — Premed Education for Metro Detroit Classrooms</title>
 <meta name="description" content="Clinically is a youth-led initiative delivering free, in-person premed education to high schools across Metro Detroit and Southeast Michigan.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   CLINICALLY — v2
+   Same green palette, rebuilt layout: editorial grid, squared
+   geometry, logo-forward masthead. Zero external JS/CSS/icons.
+   ============================================================ */
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --mint: #cdffd8;
+  --mint-soft: #e6fff0;
   --teal: #539d96;
   --teal-mid: #3d8580;
   --teal-deep: #1f4d49;
   --ink: #0a2622;
   --ink-2: #143834;
-  --cream: #f7fff9;
+  --cream: #f4fbf5;
   --paper: #ffffff;
   --coral: #ff7a8b;
-  --gold: #ffd166;
-  --line: rgba(10, 38, 34, 0.12);
-  --shadow-sm: 0 10px 30px -10px rgba(10, 38, 34, 0.15);
-  --shadow: 0 30px 60px -20px rgba(10, 38, 34, 0.25);
-  --shadow-lg: 0 50px 100px -30px rgba(10, 38, 34, 0.35);
-  --radius: 18px;
-  --radius-lg: 28px;
-  --gradient: linear-gradient(90deg, #cdffd8, #539d96);
+  --gold: #ffc94d;
 
-  /* Fluid spacing variables */
-  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
-  --space-sm: clamp(0.75rem, 1.5vw, 1rem);
-  --space-md: clamp(1rem, 2vw, 1.5rem);
-  --space-lg: clamp(1.5rem, 3vw, 2.5rem);
-  --space-xl: clamp(2rem, 5vw, 4rem);
-  --space-2xl: clamp(4rem, 8vw, 8.75rem);
+  --line: rgba(10, 38, 34, 0.14);
+  --line-strong: rgba(10, 38, 34, 0.85);
+  --line-dark: rgba(205, 255, 216, 0.16);
+
+  --r-sm: 8px;
+  --r: 14px;
+  --r-lg: 22px;
+
+  --shadow-hard: 6px 6px 0 var(--ink);
+  --shadow-hard-mint: 6px 6px 0 var(--mint);
+  --shadow-soft: 0 24px 50px -28px rgba(10, 38, 34, 0.45);
+
+  --band: clamp(4.5rem, 9vw, 9rem);
+  --gut: clamp(1.25rem, 3.2vw, 3rem);
 }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  color: var(--ink);
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   background: var(--cream);
-  overflow-x: hidden;
+  color: var(--ink);
   line-height: 1.6;
-  font-size: clamp(14px, 0.9vw, 16px);
+  font-size: clamp(14.5px, 0.92vw, 16.5px);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
 
-.display {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-style: italic;
-  letter-spacing: -0.025em;
-  line-height: 0.95;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 clamp(1.25rem, 3vw, 2.5rem);
-}
-
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--cream); }
-::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--teal-deep); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
 
 ::selection { background: var(--mint); color: var(--ink); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--teal); border: 3px solid var(--ink); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--mint); }
 
-/* SCROLL PROGRESS */
-.scroll-progress {
+.shell {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--gut);
+}
+
+.ico {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- type ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 22px;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 3px;
+  background: var(--teal);
+  display: block;
+}
+.on-dark .eyebrow { color: var(--mint); }
+.on-dark .eyebrow::before { background: var(--mint); }
+
+.h-xl,
+.h-lg {
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+.h-xl { font-size: clamp(2.45rem, 5.4vw, 5rem); }
+.h-lg { font-size: clamp(2rem, 3.9vw, 3.4rem); }
+.h-lg em, .h-xl em { font-style: italic; color: var(--teal); }
+.on-dark .h-lg em, .on-dark .h-xl em { color: var(--mint); }
+
+.lede {
+  font-size: clamp(0.96rem, 1.15vw, 1.1rem);
+  color: var(--ink-2);
+  max-width: 58ch;
+  font-weight: 500;
+}
+.on-dark .lede { color: rgba(244, 251, 245, 0.72); }
+
+.sec-head { margin-bottom: clamp(2.5rem, 5vw, 4.25rem); }
+.sec-head .h-lg { margin-bottom: 18px; }
+
+/* ---------- scroll progress ---------- */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: transparent;
+  z-index: 200;
+  pointer-events: none;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--mint), var(--teal));
+}
+
+/* ============================================================
+   MASTHEAD — logo forward
+   ============================================================ */
+.masthead {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 3px;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.2);
+  z-index: 150;
+  background: rgba(244, 251, 245, 0.86);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border-bottom: 1.5px solid var(--line);
+  transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
 }
-.scroll-progress .bar {
-  height: 100%;
-  width: 0%;
-  background: var(--gradient);
-  transition: width 0.1s linear;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: clamp(0.75rem, 1.5vw, 1.25rem);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  width: calc(100% - 32px);
-  max-width: 1320px;
-  padding: clamp(0.6rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: var(--shadow-sm);
+.masthead-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  transition: padding 0.35s ease;
 }
+.masthead.is-stuck { box-shadow: 0 12px 30px -22px rgba(10, 38, 34, 0.7); }
+.masthead.is-stuck .masthead-inner { padding: 9px 0; }
 
-.nav-logo {
+.brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-style: italic;
-  font-size: clamp(1.1rem, 1.5vw, 1.375rem);
-  color: var(--ink);
   text-decoration: none;
+  flex-shrink: 0;
 }
-
-.nav-logo-img {
-  height: clamp(28px, 4vw, 40px);
+.brand img {
+  height: clamp(38px, 4.4vw, 60px);
   width: auto;
-  display: block;
+  transition: height 0.35s ease;
 }
+.masthead.is-stuck .brand img { height: clamp(32px, 3.4vw, 44px); }
 
-.nav-links {
+.nav {
   display: flex;
-  gap: clamp(1rem, 2vw, 2rem);
+  align-items: center;
+  gap: clamp(1rem, 2.1vw, 2.2rem);
   list-style: none;
 }
-.nav-links a {
-  color: var(--ink);
+.nav a {
   text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 6px 0;
   position: relative;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--teal); }
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 2px;
-  background: var(--teal);
-  transition: width 0.3s;
-}
-.nav-links a:hover::after { width: 100%; }
-
-.nav-cta {
-  background: var(--ink);
-  color: var(--mint);
-  padding: 10px 22px;
-  border-radius: 100px;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   white-space: nowrap;
 }
-.nav-cta:hover {
-  background: var(--teal-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px; width: 0;
+  background: var(--teal);
+  transition: width 0.28s ease;
 }
+.nav a:hover::after { width: 100%; }
 
-/* HERO */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--ink);
+  color: var(--mint);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 13px 22px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--teal-deep); border-color: var(--teal-deep); }
+
+.burger {
+  display: none;
+  width: 46px; height: 46px;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  font-size: 20px;
+  cursor: pointer;
+}
+.drawer {
+  display: none;
+  border-top: 1.5px solid var(--line);
+  background: var(--cream);
+}
+.drawer ul { list-style: none; padding: 10px 0 20px; }
+.drawer a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  text-decoration: none;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.drawer a .ico { color: var(--teal); font-size: 18px; }
+.masthead.is-open .drawer { display: block; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
 .hero {
   position: relative;
-  min-height: 100vh;
-  background: linear-gradient(90deg, #cdffd8, #539d96);
+  background:
+    radial-gradient(70% 90% at 82% 8%, rgba(83, 157, 150, 0.55), transparent 62%),
+    radial-gradient(55% 70% at 8% 92%, rgba(205, 255, 216, 0.18), transparent 60%),
+    linear-gradient(158deg, #0a2622 0%, #123531 48%, #1f4d49 100%);
+  color: var(--cream);
+  padding: clamp(8.5rem, 15vh, 12rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
-  padding: clamp(6rem, 12vh, 9rem) 0 clamp(5rem, 8vh, 6.5rem);
-  display: flex;
-  align-items: center;
 }
-
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.15;
-  mix-blend-mode: overlay;
+  background-image:
+    linear-gradient(rgba(205, 255, 216, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(205, 255, 216, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 85%);
   pointer-events: none;
 }
-
-.hero-blob {
+.hero-plus {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-}
-.hero-blob-1 {
-  width: 500px; height: 500px;
-  background: rgba(255, 255, 255, 0.3);
-  top: -100px; right: -100px;
-  animation: float1 18s ease-in-out infinite;
-}
-.hero-blob-2 {
-  width: 400px; height: 400px;
-  background: rgba(205, 255, 216, 0.4);
-  bottom: -100px; left: -50px;
-  animation: float2 22s ease-in-out infinite;
-}
-@keyframes float1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-50px, 80px) scale(1.1); }
-}
-@keyframes float2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(60px, -60px) scale(0.9); }
-}
-
-.plus-sign {
-  position: absolute;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  color: rgba(205, 255, 216, 0.22);
+  font-weight: 800;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.4);
   user-select: none;
   pointer-events: none;
-  animation: floatPlus 8s ease-in-out infinite;
+  animation: bob 9s ease-in-out infinite;
 }
-@keyframes floatPlus {
+@keyframes bob {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(15deg); }
+  50% { transform: translateY(-18px) rotate(12deg); }
 }
+.hero .shell { position: relative; z-index: 2; }
 
-.hero-content {
+/* logo lockup — the loudest thing on the page */
+.lockup {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
+  border-bottom: 1.5px solid var(--line-dark);
+}
+.lockup-logo {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(2rem, 4vw, 3.75rem);
-  align-items: center;
-  width: 100%;
+  width: clamp(280px, 46vw, 620px);
 }
+.lockup-logo img {
+  width: 100%;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.lockup-logo::after {
+  content: '';
+  position: absolute;
+  left: -6%;
+  right: 22%;
+  bottom: -14px;
+  height: 10px;
+  background: var(--mint);
+  opacity: 0.9;
+  border-radius: 2px;
+}
+.lockup-note {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 251, 245, 0.62);
+  text-align: right;
+  line-height: 1.9;
+  padding-bottom: 6px;
+}
+.lockup-note b { color: var(--mint); display: block; font-weight: 800; }
 
-.hero-tag {
+.tag {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  gap: 11px;
+  padding: 9px 18px;
+  border: 1.5px solid var(--line-dark);
   border-radius: 100px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: clamp(1.5rem, 3vh, 1.75rem);
+  background: rgba(205, 255, 216, 0.06);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--mint);
+  margin-bottom: 26px;
 }
-.hero-tag .pulse {
+.dot {
   width: 8px; height: 8px;
   background: var(--coral);
   border-radius: 50%;
   position: relative;
   flex-shrink: 0;
 }
-.hero-tag .pulse::before {
+.dot::after {
   content: '';
   position: absolute;
-  inset: -4px;
+  inset: -5px;
   border-radius: 50%;
   background: var(--coral);
-  opacity: 0.4;
-  animation: ping 2s ease-out infinite;
+  opacity: 0.45;
+  animation: ping 2.2s ease-out infinite;
 }
 @keyframes ping {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2.5); opacity: 0; }
+  0% { transform: scale(0.9); opacity: 0.55; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
-.hero h1 {
-  font-size: clamp(2.5rem, 5.5vw, 5.25rem);
-  font-weight: 800;
-  font-style: italic;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  color: var(--ink);
-  margin-bottom: 24px;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: clamp(2rem, 4.5vw, 4.5rem);
+  align-items: start;
 }
-.hero h1 .gradient {
-  background: linear-gradient(90deg, #ffffff, #f0fff5);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline;
-}
+.hero h1 { margin-bottom: 22px; color: var(--cream); }
+.hero h1 em { color: var(--mint); }
+.hero-lede { margin-bottom: 34px; }
 
-.hero-sub {
-  font-size: clamp(0.95rem, 1.2vw, 1.125rem);
-  color: var(--ink-2);
-  margin-bottom: clamp(2rem, 4vh, 2.25rem);
-  max-width: 540px;
-  line-height: 1.6;
-  font-weight: 500;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
+.actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 38px; }
 
 .btn {
-  padding: 16px 32px;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 15px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 16px 28px;
   font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: var(--r-sm);
+  border: 1.5px solid transparent;
+  cursor: pointer;
 }
-.btn-primary {
+.btn-solid {
+  background: var(--mint);
+  color: var(--ink);
+  border-color: var(--mint);
+  box-shadow: var(--shadow-hard);
+}
+.btn-solid:hover { background: var(--paper); border-color: var(--paper); }
+.btn-line {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgba(244, 251, 245, 0.45);
+}
+.btn-line:hover { border-color: var(--mint); color: var(--mint); }
+.btn-ink {
   background: var(--ink);
   color: var(--mint);
-}
-.btn-primary:hover {
-  background: var(--ink-2);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px -15px rgba(10, 38, 34, 0.5);
-}
-.btn-ghost {
-  background: rgba(255, 255, 255, 0.4);
-  color: var(--ink);
-  border: 1.5px solid rgba(10, 38, 34, 0.2);
-  backdrop-filter: blur(10px);
-}
-.btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.7);
   border-color: var(--ink);
+  box-shadow: var(--shadow-hard-mint);
 }
+.btn-ink:hover { background: var(--teal-deep); border-color: var(--teal-deep); }
 
-.hero-trust {
+.trust {
   display: flex;
-  align-items: center;
-  gap: 24px;
-  font-size: 14px;
-  color: var(--ink-2);
-  font-weight: 600;
   flex-wrap: wrap;
+  gap: 10px;
 }
-.hero-mini-info {
+.trust span {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-.hero-mini-info i {
-  color: var(--teal-deep);
-}
-
-/* HERO CARD */
-.hero-visual { position: relative; }
-
-.hero-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 2.5vw, 2rem);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  z-index: 2;
-}
-
-.hero-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px dashed var(--line);
-}
-.hero-card-top .label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--teal-deep);
+  gap: 9px;
+  font-size: 12.5px;
   font-weight: 700;
+  color: var(--cream);
+  border: 1.5px solid var(--line-dark);
+  border-radius: 100px;
+  padding: 9px 16px;
 }
-.hero-card-top .duration-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 700;
+.trust .ico { color: var(--mint); font-size: 15px; }
+
+/* session card */
+.card {
+  background: var(--paper);
   color: var(--ink);
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--ink);
+  box-shadow: 10px 10px 0 rgba(205, 255, 216, 0.28);
+  overflow: hidden;
+}
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--ink);
+  color: var(--mint);
+  padding: 16px 22px;
+}
+.card-top .k {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.card-top .v {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
   background: var(--mint);
-  padding: 4px 10px;
+  color: var(--ink);
+  padding: 5px 12px;
   border-radius: 100px;
   white-space: nowrap;
 }
+.card-body { padding: clamp(1.25rem, 2vw, 1.75rem); }
 
-/* SESSION SNAPSHOT */
-.session-snapshot {
-  background: var(--cream);
-  border-radius: var(--radius);
-  padding: clamp(1.25rem, 2vw, 1.5rem);
-  margin-bottom: 24px;
-  border: 1px solid var(--line);
-}
-.snapshot-title {
-  font-size: 12px;
+.mini-title {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
   color: var(--teal-deep);
-  font-weight: 700;
   margin-bottom: 16px;
 }
-.snapshot-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 16px;
-}
-.snapshot-item:last-child { margin-bottom: 0; }
-.snapshot-item .icon-box {
-  width: 36px; height: 36px;
-  background: var(--paper);
-  color: var(--ink);
-  border: 1px solid var(--line);
+.incl { display: grid; gap: 14px; margin-bottom: 24px; }
+.incl-row { display: flex; gap: 14px; align-items: flex-start; }
+.incl-row .bx {
+  width: 38px; height: 38px;
+  display: grid;
+  place-items: center;
+  background: var(--mint);
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+  font-size: 17px;
+  color: var(--teal-deep);
   flex-shrink: 0;
 }
-.snapshot-item .text {
-  flex: 1;
-}
-.snapshot-item .text span {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.snapshot-item .text p {
-  font-size: 13px;
-  color: var(--ink-2);
-  line-height: 1.4;
-}
+.incl-row .txt { min-width: 0; }
+.incl-row b { display: block; font-size: 14px; }
+.incl-row p { font-size: 12.8px; color: var(--ink-2); line-height: 1.45; }
 
-.roadmap {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.roadmap-step {
+.track { display: grid; gap: 8px; border-top: 1.5px dashed var(--line); padding-top: 20px; }
+.track-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
-  background: var(--cream);
-  border-radius: 12px;
-  border-left: 3px solid var(--teal);
-  font-size: 13px;
-  transition: all 0.3s;
+  gap: 13px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font-size: 12.8px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
-.roadmap-step:hover { transform: translateX(4px); }
-.roadmap-step .num {
-  font-weight: 700;
-  font-style: italic;
-  color: var(--teal);
-  font-size: 16px;
-  min-width: 20px;
-}
-.roadmap-step .title {
-  font-weight: 700;
-  color: var(--ink);
-}
-.roadmap-step .meta {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--ink-2);
-  opacity: 0.7;
-}
-.roadmap-step.done { border-left-color: var(--teal-deep); opacity: 0.6; }
-.roadmap-step.done .title { text-decoration: line-through; text-decoration-color: var(--teal); }
-.roadmap-step.current {
+.track-row:hover { transform: translateX(4px); border-color: var(--teal); }
+.track-row .n { font-weight: 800; font-style: italic; color: var(--teal); }
+.track-row .t { font-weight: 700; }
+.track-row .m { margin-left: auto; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; }
+.track-row.done { opacity: 0.55; }
+.track-row.done .t { text-decoration: line-through; }
+.track-row.now {
   background: var(--mint);
-  border-left-color: var(--coral);
-  animation: pulseCurrent 2s ease-in-out infinite;
+  border-color: var(--ink);
 }
-@keyframes pulseCurrent {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 122, 139, 0.4); }
-  50% { box-shadow: 0 0 0 6px rgba(255, 122, 139, 0); }
-}
-.roadmap-step.current .num { color: var(--coral); }
+.track-row.now .n { color: var(--coral); }
 
 /* ============================================================
-   MARQUEE  (rebuilt: two identical tracks, seamless loop)
+   MARQUEE
    ============================================================ */
-.marquee {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: var(--ink);
-  color: var(--mint);
-  padding: 14px 0;
+.strip {
+  background: var(--mint);
+  color: var(--ink);
+  border-top: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  padding: 15px 0;
   overflow: hidden;
-  z-index: 3;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.marquee-track {
+.strip-track {
   display: flex;
   width: max-content;
+  animation: slide 34s linear infinite;
   will-change: transform;
-  animation: marquee 32s linear infinite;
 }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-
-.marquee-group {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  flex: 0 0 auto;
-  margin: 0;
-  padding: 0;
-}
-.marquee-group li {
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-group { display: flex; align-items: center; list-style: none; flex: 0 0 auto; }
+.strip-group li {
   display: inline-flex;
   align-items: center;
-  gap: 40px;
-  padding-right: 40px;
-  font-weight: 700;
+  gap: 34px;
+  padding-right: 34px;
+  font-size: 13px;
+  font-weight: 800;
   font-style: italic;
-  font-size: 14px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
-.marquee-group li::after {
-  content: '✕';
-  color: var(--coral);
-  font-style: normal;
-  font-weight: 900;
-}
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
-}
-
-/* SECTION DEFAULTS */
-section { position: relative; }
-
-.section-head {
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  max-width: 720px;
-}
-.section-tag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--teal);
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: 16px;
-}
-.section-title {
-  font-size: clamp(2rem, 4vw, 3.625rem);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--ink);
-  line-height: 1;
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-}
-.section-title em {
-  color: var(--teal);
-  font-style: italic;
-}
-.section-sub {
-  font-size: clamp(0.95rem, 1.2vw, 1.0625rem);
-  color: var(--ink-2);
-  max-width: 600px;
-  line-height: 1.6;
-}
-
-/* WHAT WE DO */
-.what-we-do {
-  padding: var(--space-2xl) 0;
-  background: var(--cream);
-}
-.programs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1rem, 2vw, 1.5rem);
-}
-
-.program-card {
-  background: var(--paper);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 2.5vw, 2.25rem);
-  border: 1px solid var(--line);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-.program-card::before {
+.strip-group li::after {
   content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--gradient);
-  opacity: 0;
-  transition: opacity 0.4s;
-  z-index: 0;
-}
-.program-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-  border-color: transparent;
-}
-.program-card:hover::before { opacity: 0.08; }
-.program-card > * { position: relative; z-index: 1; }
-
-.program-icon {
-  width: 56px; height: 56px;
-  background: var(--mint);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: var(--teal-deep);
-  margin-bottom: 24px;
-  transition: all 0.4s;
-}
-.program-card:hover .program-icon {
-  background: var(--ink);
-  color: var(--mint);
-  transform: rotate(-8deg) scale(1.05);
-}
-.program-card h3 {
-  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-  font-weight: 700;
-  font-style: italic;
-  color: var(--ink);
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-}
-.program-card p {
-  font-size: 15px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-.program-card ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.program-card ul li {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 5px 12px;
-  background: var(--cream);
-  border-radius: 100px;
-  color: var(--teal-deep);
-}
-.program-card:hover ul li { background: rgba(255, 255, 255, 0.7); }
-
-/* WHY IT MATTERS */
-.why-matters {
-  padding: var(--space-2xl) 0;
-  background: var(--ink);
-  color: var(--cream);
-  position: relative;
-  overflow: hidden;
-}
-.why-matters::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(83, 157, 150, 0.3), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(205, 255, 216, 0.15), transparent 40%);
-  pointer-events: none;
-}
-.why-matters .container { position: relative; z-index: 1; }
-.why-matters .section-title { color: var(--cream); }
-.why-matters .section-title em { color: var(--mint); }
-.why-matters .section-sub { color: rgba(247, 255, 249, 0.7); }
-.why-matters .section-tag { color: var(--mint); }
-
-.why-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 4vw, 3.75rem);
-  align-items: center;
-  margin-top: 80px;
-}
-
-.why-points {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.why-point {
-  padding: 28px 32px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  border-left: 4px solid var(--mint);
-  transition: all 0.3s;
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-}
-.why-point:hover {
-  background: rgba(255, 255, 255, 0.07);
-  transform: translateX(8px);
-}
-.point-icon {
-  width: 48px; height: 48px;
-  background: var(--mint);
-  color: var(--ink);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-.why-point h4 {
-  font-size: 20px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--cream);
-  margin-bottom: 8px;
-}
-.why-point p {
-  font-size: 14px;
-  color: rgba(247, 255, 249, 0.8);
-  line-height: 1.5;
-}
-
-.why-quote {
-  padding: 48px;
-  background: linear-gradient(135deg, rgba(205, 255, 216, 0.08), rgba(83, 157, 150, 0.04));
-  border: 1px solid rgba(205, 255, 216, 0.2);
-  border-radius: var(--radius-lg);
-  position: relative;
-}
-.why-quote .quote-mark {
-  font-size: 80px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--mint);
-  line-height: 0.5;
-  opacity: 0.5;
-  margin-bottom: 16px;
-}
-.why-quote blockquote {
-  font-size: 22px;
-  font-weight: 500;
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--cream);
-  margin-bottom: 24px;
-  letter-spacing: -0.01em;
-}
-.why-quote cite {
-  font-style: normal;
-  font-size: 14px;
-  color: var(--mint);
-  font-weight: 600;
-  display: block;
-}
-.why-quote cite span {
-  display: block;
-  color: rgba(247, 255, 249, 0.5);
-  font-weight: 400;
-  margin-top: 4px;
-}
-
-/* PROCESS */
-.process {
-  padding: var(--space-2xl) 0;
-  background: linear-gradient(180deg, var(--cream) 0%, var(--mint) 100%);
-  position: relative;
-  overflow: hidden;
-}
-.process::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
-}
-
-.process-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1.25rem, 2vw, 1.5rem);
-  position: relative;
-}
-
-.process-steps::before {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 5%; right: 5%;
-  height: 2px;
-  background: repeating-linear-gradient(90deg, var(--teal) 0, var(--teal) 8px, transparent 8px, transparent 16px);
-  z-index: 0;
-}
-
-.step {
-  position: relative;
-  z-index: 1;
-  text-align: left;
-}
-.step-num {
-  width: 80px; height: 80px;
-  background: var(--paper);
-  border: 2px solid var(--teal);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--teal-deep);
-  margin-bottom: 24px;
-  transition: all 0.4s;
-  position: relative;
-}
-.step:hover .step-num {
-  background: var(--ink);
-  color: var(--mint);
-  border-color: var(--ink);
-  transform: scale(1.05);
-}
-.step-num::after {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border: 2px dashed var(--teal);
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.step:hover .step-num::after { opacity: 0.4; }
-
-.step h3 {
-  font-size: 20px;
-  font-weight: 700;
-  font-style: italic;
-  margin-bottom: 10px;
-  color: var(--ink);
-}
-.step p {
-  font-size: 14px;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-/* SERVICE AREA */
-.area {
-  padding: var(--space-2xl) 0;
-  background: var(--paper);
-}
-.area-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 4vw, 3.75rem);
-  align-items: center;
-}
-.area-map {
-  background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  box-shadow: var(--shadow-sm);
-}
-.area-map h4 {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--teal-deep);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 20px;
-}
-.area-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.area-chips span {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  padding: 8px 16px;
-  border-radius: 100px;
-  transition: all 0.25s;
-}
-.area-chips span:hover {
-  background: var(--ink);
-  color: var(--mint);
-  border-color: var(--ink);
-  transform: translateY(-2px);
-}
-.area-note {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px dashed var(--line);
-  font-size: 13.5px;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-/* TESTIMONIALS */
-.testimonials {
-  padding: var(--space-2xl) 0;
-  background: var(--cream);
-}
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.25rem, 2vw, 1.5rem);
-}
-
-.testimonial {
-  padding: 36px;
-  background: var(--paper);
-  border-radius: var(--radius-lg);
-  position: relative;
-  border: 1px solid var(--line);
-  transition: all 0.3s;
-}
-.testimonial:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-.testimonial .stars {
-  color: var(--gold);
-  margin-bottom: 16px;
-  font-size: 14px;
-  letter-spacing: 2px;
-}
-.testimonial blockquote {
-  font-size: 16px;
-  font-weight: 500;
-  font-style: italic;
-  color: var(--ink);
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-.testimonial .author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.testimonial .author .avatar {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: var(--gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--ink);
-  font-size: 16px;
-  flex-shrink: 0;
-}
-.testimonial .author .name {
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--ink);
-}
-.testimonial .author .role {
-  font-size: 12px;
-  color: var(--ink-2);
-}
-
-/* CONTACT */
-.contact {
-  padding: var(--space-2xl) 0;
-  background: linear-gradient(90deg, #cdffd8, #539d96);
-  position: relative;
-  overflow: hidden;
-}
-.contact::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.12;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(2rem, 4vw, 3.75rem);
-  align-items: start;
-  position: relative;
-  z-index: 1;
-}
-
-.contact-info .section-title { color: var(--ink); }
-.contact-info .section-title em { color: var(--teal-deep); }
-.contact-info .section-sub { color: var(--ink-2); }
-.contact-info .section-tag { color: var(--teal-deep); }
-
-.contact-meta {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.contact-meta-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  transition: all 0.3s;
-}
-.contact-meta-item:hover {
-  background: rgba(255, 255, 255, 0.75);
-  transform: translateX(6px);
-}
-.contact-meta-item .icon {
-  width: 44px; height: 44px;
-  background: var(--ink);
-  color: var(--mint);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-.contact-meta-item .label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--teal-deep);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-}
-.contact-meta-item .value {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ink);
-  text-decoration: none;
-  word-break: break-word;
-  transition: color 0.2s;
-}
-a.contact-value:hover { color: var(--teal-deep); text-decoration: underline; }
-
-.contact-form {
-  background: var(--paper);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-}
-
-.form-head {
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 1px dashed var(--line);
-}
-.form-head h3 {
-  font-size: 26px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-.form-head p {
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 0;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 16px;
-}
-.form-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
-}
-.form-group label .req {
-  color: var(--coral);
-  margin-left: 2px;
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1.5px solid var(--line);
-  border-radius: 12px;
-  background: var(--cream);
-  font-family: inherit;
-  font-size: 16px; /* Enforced 16px to stop iOS auto-zoom */
-  color: var(--ink);
-  transition: all 0.3s;
-  font-weight: 500;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--teal);
-  background: var(--paper);
-  box-shadow: 0 0 0 4px rgba(83, 157, 150, 0.15);
-}
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: rgba(10, 38, 34, 0.4);
-}
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-  font-family: inherit;
-}
-
-.form-submit {
-  width: 100%;
-  padding: 18px;
-  background: var(--ink);
-  color: var(--mint);
-  border: none;
-  border-radius: 12px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-style: italic;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 8px;
-}
-.form-submit:hover {
+  width: 7px; height: 7px;
   background: var(--teal-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  transform: rotate(45deg);
 }
-
-.form-note {
-  font-size: 12px;
-  color: var(--ink-2);
-  text-align: center;
-  margin-top: 16px;
-  opacity: 0.8;
-}
-
-/* FOOTER */
-footer {
-  background: var(--ink);
-  color: var(--cream);
-  padding: 80px 0 40px;
-  position: relative;
-  overflow: hidden;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-
-.footer-brand .nav-logo {
-  color: var(--cream);
-  margin-bottom: 20px;
-}
-
-/* Make logo white on dark footer if it's a dark SVG */
-.footer-logo-img {
-  filter: brightness(0) invert(1);
-}
-
-.footer-brand p {
-  font-size: 14px;
-  color: rgba(247, 255, 249, 0.6);
-  line-height: 1.6;
-  max-width: 320px;
-  margin-bottom: 24px;
-}
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
-.footer-social a {
-  width: 40px; height: 40px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--cream);
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.footer-social a:hover {
-  background: var(--mint);
-  color: var(--ink);
-  transform: translateY(-3px);
-}
-
-.footer-col h4 {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--mint);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  margin-bottom: 16px;
-}
-.footer-col ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.footer-col a {
-  color: rgba(247, 255, 249, 0.7);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-.footer-col a:hover { color: var(--mint); }
-
-.footer-bottom {
-  padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  color: rgba(247, 255, 249, 0.5);
-  flex-wrap: wrap;
-  gap: 16px;
+@keyframes slide {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ============================================================
-   MAGNETIC BUTTONS
-   Own transition for `transform` so the pull tracks the cursor
-   instead of lagging behind the generic `transition: all .3s`.
+   SECTIONS
    ============================================================ */
+section { scroll-margin-top: 96px; }
+.band { padding: var(--band) 0; }
+.band-paper { background: var(--paper); }
+.band-cream { background: var(--cream); }
+.band-ink {
+  background:
+    radial-gradient(60% 80% at 85% 15%, rgba(83, 157, 150, 0.4), transparent 60%),
+    var(--ink);
+  color: var(--cream);
+}
+.band-mint {
+  background: linear-gradient(140deg, var(--mint-soft) 0%, var(--mint) 45%, #9fdcc4 100%);
+}
+
+/* PROGRAMS — bento */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(0.9rem, 1.5vw, 1.4rem);
+}
+.tile {
+  grid-column: span 6;
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r);
+  padding: clamp(1.5rem, 2.4vw, 2.4rem);
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+}
+.tile:nth-child(1), .tile:nth-child(4) { grid-column: span 7; }
+.tile:nth-child(2), .tile:nth-child(3) { grid-column: span 5; }
+.tile:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); }
+.tile-n {
+  position: absolute;
+  top: 18px; right: 22px;
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--teal);
+  letter-spacing: 0.1em;
+}
+.tile-ico {
+  width: 58px; height: 58px;
+  display: grid;
+  place-items: center;
+  background: var(--mint);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  font-size: 26px;
+  color: var(--ink);
+  margin-bottom: 22px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.tile:hover .tile-ico { background: var(--ink); color: var(--mint); transform: rotate(-6deg); }
+.tile h3 {
+  font-size: clamp(1.3rem, 1.9vw, 1.65rem);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.tile p { font-size: 14.5px; color: var(--ink-2); margin-bottom: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.chips li {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 13px;
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  color: var(--teal-deep);
+}
+
+/* WHY */
+.why-wrap {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+.why-list { display: grid; gap: 0; border-top: 1.5px solid var(--line); }
+.why-item {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 30px 6px;
+  border-bottom: 1.5px solid var(--line);
+  transition: padding-left 0.3s ease, background 0.3s ease;
+}
+.why-item:hover { padding-left: 20px; background: rgba(205, 255, 216, 0.22); }
+.why-item .bx {
+  width: 50px; height: 50px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  background: var(--mint);
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.why-item h4 { font-size: 1.25rem; font-weight: 800; font-style: italic; margin-bottom: 7px; }
+.why-item p { font-size: 14px; color: var(--ink-2); }
+
+.quote {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--r-lg);
+  padding: clamp(1.8rem, 3vw, 3rem);
+  position: sticky;
+  top: 120px;
+  box-shadow: var(--shadow-soft);
+}
+.quote .mark {
+  font-size: 90px;
+  line-height: 0.6;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--mint);
+  opacity: 0.55;
+  margin-bottom: 18px;
+}
+.quote blockquote {
+  font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.42;
+  margin-bottom: 26px;
+}
+.quote cite { font-style: normal; font-size: 13.5px; font-weight: 700; color: var(--mint); }
+.quote cite span { display: block; font-weight: 400; color: rgba(244, 251, 245, 0.5); margin-top: 5px; }
+
+/* PROCESS */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+  counter-reset: step;
+}
+.step { position: relative; padding-top: 30px; border-top: 2px solid var(--line-dark); }
+.step::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: 0;
+  width: 10px; height: 10px;
+  background: var(--mint);
+  transform: rotate(45deg);
+}
+.step .num {
+  font-size: clamp(2.6rem, 4.4vw, 4rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.6px var(--mint);
+  margin-bottom: 18px;
+  transition: color 0.35s ease;
+}
+.step:hover .num { color: var(--mint); }
+.step h3 { font-size: 1.2rem; font-weight: 800; font-style: italic; margin-bottom: 10px; }
+.step p { font-size: 13.8px; color: rgba(244, 251, 245, 0.72); }
+
+/* AREA */
+.area-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+.area-panel {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 2.6vw, 2.4rem);
+  box-shadow: var(--shadow-hard);
+}
+.area-panel h4 {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 20px;
+}
+.pins { display: flex; flex-wrap: wrap; gap: 9px; }
+.pins span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.8px;
+  font-weight: 700;
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  padding: 8px 15px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.pins span::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.pins span:hover {
+  background: var(--ink);
+  color: var(--mint);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.pins span:hover::before { background: var(--mint); }
+.area-note {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1.5px dashed var(--line);
+  font-size: 13.4px;
+  color: var(--ink-2);
+}
+.area-note .ico { color: var(--teal-deep); font-size: 20px; margin-top: 2px; }
+
+.area-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 14px 20px;
+  background: var(--ink);
+  color: var(--mint);
+  border-radius: var(--r-sm);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 15px;
+}
+.area-badge .ico { font-size: 20px; }
+
+/* TESTIMONIALS */
+.says { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 1.8vw, 1.5rem); }
+.say {
+  background: var(--paper);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r);
+  padding: clamp(1.5rem, 2.2vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.say:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-hard); }
+.stars { color: var(--gold); letter-spacing: 3px; font-size: 14px; margin-bottom: 16px; }
+.say blockquote { font-size: 15px; font-style: italic; font-weight: 500; line-height: 1.5; margin-bottom: 26px; flex: 1; }
+.who { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1.5px dashed var(--line); }
+.who .av {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mint);
+  border: 1.5px solid var(--ink);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.who b { display: block; font-size: 13.5px; }
+.who small { display: block; font-size: 11.5px; color: var(--ink-2); }
+
+/* CONTACT */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+.meta { display: grid; gap: 12px; margin-top: 34px; }
+.meta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1.5px solid rgba(10, 38, 34, 0.16);
+  border-radius: var(--r);
+  padding: 16px 18px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.meta-row:hover { transform: translateX(6px); background: var(--paper); }
+.meta-row .bx {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--mint);
+  border-radius: 11px;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.meta-row .k {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 3px;
+}
+.meta-row .txt { min-width: 0; }
+.meta-row .k { display: block; }
+.meta-row .v { display: block; font-size: 14.5px; font-weight: 700; text-decoration: none; word-break: break-word; }
+a.v:hover { color: var(--teal-deep); text-decoration: underline; }
+
+.form {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 2.8vw, 2.6rem);
+  box-shadow: 12px 12px 0 rgba(10, 38, 34, 0.14);
+}
+.form-head { margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1.5px dashed var(--line); }
+.form-head h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 800; font-style: italic; margin-bottom: 6px; }
+.form-head p { font-size: 13.5px; color: var(--ink-2); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.field label i { color: var(--coral); font-style: normal; }
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 13px 15px;
+  background: var(--cream);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.field textarea { min-height: 104px; resize: vertical; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  background: var(--paper);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(83, 157, 150, 0.18);
+}
+.field input::placeholder, .field textarea::placeholder { color: rgba(10, 38, 34, 0.38); }
+.submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 17px;
+  font-size: 15px;
+  font-style: italic;
+}
+.form-note { text-align: center; font-size: 11.5px; color: var(--ink-2); margin-top: 14px; opacity: 0.85; }
+
+/* FOOTER */
+.foot {
+  background: var(--ink);
+  color: var(--cream);
+  padding: clamp(3.5rem, 7vw, 6rem) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.foot-brand img {
+  width: clamp(190px, 22vw, 280px);
+  filter: brightness(0) invert(1);
+  margin-bottom: 22px;
+}
+.foot-brand p { font-size: 13.8px; color: rgba(244, 251, 245, 0.6); max-width: 40ch; margin-bottom: 26px; }
+.social { display: flex; gap: 10px; }
+.social a {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--line-dark);
+  border-radius: 11px;
+  font-size: 20px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.social a:hover { background: var(--mint); color: var(--ink); border-color: var(--mint); transform: translateY(-3px); }
+
+.foot-col h4 {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 18px;
+}
+.foot-col ul { list-style: none; display: grid; gap: 11px; }
+.foot-col a { font-size: 13.8px; color: rgba(244, 251, 245, 0.68); text-decoration: none; }
+.foot-col a:hover { color: var(--mint); }
+
+.foot-mark {
+  border-top: 1.5px solid var(--line-dark);
+  padding: 26px 0 34px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+  color: rgba(244, 251, 245, 0.45);
+}
+.watermark {
+  padding-bottom: 10px;
+  pointer-events: none;
+  user-select: none;
+}
+.watermark img {
+  width: 100%;
+  filter: brightness(0) invert(1);
+  opacity: 0.07;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%) translateY(180%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink);
+  color: var(--mint);
+  border: 1.5px solid var(--mint);
+  border-radius: 100px;
+  padding: 14px 24px;
+  font-size: 13.5px;
+  font-weight: 700;
+  z-index: 300;
+  max-width: 92vw;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s ease, visibility 0s linear 0.55s;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.3s ease, visibility 0s;
+}
+.toast .bx {
+  width: 24px; height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--ink);
+  font-size: 14px;
+}
+.toast.bad { background: var(--coral); color: #fff; border-color: #fff; }
+.toast.bad .bx { background: #fff; color: var(--coral); }
+
+/* MAGNETIC */
 .magnetic {
   will-change: transform;
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .magnetic.is-pulled {
-  transition:
-    transform 0.14s cubic-bezier(0.33, 1, 0.68, 1),
-    background 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.14s cubic-bezier(0.33, 1, 0.68, 1),
+              background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .magnetic-inner {
   display: inline-flex;
@@ -1313,553 +1060,309 @@ footer {
   pointer-events: none;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.magnetic.is-pulled .magnetic-inner {
-  transition: transform 0.14s cubic-bezier(0.33, 1, 0.68, 1);
-}
+.magnetic.is-pulled .magnetic-inner { transition: transform 0.14s cubic-bezier(0.33, 1, 0.68, 1); }
 
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(150%);
-  background: var(--ink);
-  color: var(--mint);
-  padding: 16px 28px;
-  border-radius: 100px;
-  font-weight: 600;
-  font-size: 14px;
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 90vw;
+/* REVEAL */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.toast.show { transform: translateX(-50%) translateY(0); }
-.toast .icon {
-  width: 24px; height: 24px;
-  background: var(--mint);
-  color: var(--ink);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  flex-shrink: 0;
-}
-.toast.error { background: var(--coral); color: white; }
-.toast.error .icon { background: white; color: var(--coral); }
+[data-reveal].seen { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* ====================================================================
-   RESPONSIVE BREAKPOINTS
-   ==================================================================== */
-
-/* LAPTOP / SMALL DESKTOP FIT */
-@media (max-width: 1280px) and (max-height: 850px) {
-  .hero {
-    padding: clamp(5rem, 10vh, 7rem) 0 clamp(4rem, 6vh, 5rem);
-  }
-  .hero h1 {
-    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-  }
-  .hero-sub {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
-  .hero-ctas {
-    margin-bottom: 1.5rem;
-  }
-  .btn {
-    padding: 12px 24px;
-    font-size: 14px;
-  }
-  .hero-card {
-    padding: 1.25rem;
-  }
-  .session-snapshot {
-    padding: 1rem;
-  }
-  .snapshot-item {
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-  .snapshot-item .icon-box {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
-  }
-  .snapshot-item .text span {
-    font-size: 13px;
-  }
-  .snapshot-item .text p {
-    font-size: 12px;
-  }
-  .roadmap-step {
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-  .roadmap-step .num {
-    font-size: 14px;
-  }
-  .section-title {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-  }
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1080px) {
+  .nav { display: none; }
+  .burger { display: flex; }
+  .nav-cta { display: none; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .why-wrap, .area-wrap, .contact-wrap { grid-template-columns: 1fr; }
+  .quote { position: static; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .says { grid-template-columns: 1fr; }
+  .tile, .tile:nth-child(1), .tile:nth-child(2), .tile:nth-child(3), .tile:nth-child(4) { grid-column: span 12; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .foot-brand { grid-column: 1 / -1; }
 }
 
-/* TABLET (under 968px) */
-@media (max-width: 968px) {
-  .nav-links { display: none; }
-
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .hero {
-    padding: 120px 0 80px;
-    min-height: auto;
-  }
-
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 40px;
-  }
-
-  .process-steps {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .process-steps::before { display: none; }
-
-  .area-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .contact-meta {
-    margin-top: 30px;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .footer-brand { grid-column: 1 / -1; }
-}
-
-/* MOBILE (under 600px) */
-@media (max-width: 600px) {
-  section {
-    padding: 60px 0 !important;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-
-  nav {
-    top: 8px;
-    width: calc(100% - 16px);
-    padding: 8px 12px;
-  }
-  .nav-logo {
-    font-size: 1rem;
-  }
-  .nav-logo-img {
-    height: 28px;
-  }
-  .nav-cta {
-    padding: 8px 14px;
-    font-size: 12px;
-  }
-
-  .hero {
-    padding: 100px 0 70px !important;
-  }
-
-  .hero-tag {
-    font-size: 11px;
-    padding: 6px 12px;
-  }
-
-  .hero h1 {
-    font-size: clamp(2rem, 8vw, 2.5rem);
-  }
-
-  .hero-sub {
-    font-size: 0.95rem;
-  }
-
-  .hero-ctas {
-    flex-direction: column;
-    width: 100%;
-    gap: 12px;
-    margin-bottom: 30px;
-  }
-
-  .btn {
-    width: 100%;
-    justify-content: center;
-    padding: 14px 20px;
-  }
-
-  .hero-trust {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 12px;
-  }
-
-  .hero-card {
-    padding: 1.25rem;
-  }
-
-  .hero-card-top {
-    margin-bottom: 16px;
-    padding-bottom: 14px;
-  }
-
-  .session-snapshot {
-    padding: 1rem;
-    margin-bottom: 16px;
-  }
-
-  .snapshot-item {
-    gap: 10px;
-    margin-bottom: 12px;
-  }
-
-  .snapshot-item .icon-box {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
-  }
-
-  .snapshot-item .text span {
-    font-size: 13px;
-  }
-
-  .snapshot-item .text p {
-    font-size: 12px;
-  }
-
-  .roadmap-step {
-    padding: 10px 12px;
-    font-size: 12px;
-  }
-
-  .programs-grid,
-  .process-steps,
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .program-card,
-  .testimonial {
-    padding: 24px;
-  }
-
-  .why-point {
-    padding: 20px;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .why-quote {
-    padding: 28px;
-  }
-
-  .why-quote blockquote {
-    font-size: 18px;
-  }
-
-  .step-num {
-    width: 60px;
-    height: 60px;
-    font-size: 22px;
-  }
-
-  .contact-form {
-    padding: 24px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-bottom: 40px;
-  }
-
-  .footer-brand {
-    text-align: left;
-  }
-
-  .footer-brand p {
-    max-width: 100%;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 8px;
-  }
-
-  .toast {
-    bottom: 16px;
-    padding: 12px 20px;
-    font-size: 13px;
-  }
+@media (max-width: 720px) {
+  .hero { padding-top: clamp(6.5rem, 18vh, 8rem); }
+  .hero-plus { display: none; }
+  .lockup { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .lockup-logo { width: min(100%, 420px); }
+  .lockup-note { text-align: left; }
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+  .pair { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .why-item { flex-direction: column; gap: 14px; }
+  .card-top { flex-direction: row; }
+  .foot-mark { flex-direction: column; text-align: left; }
 }
 </style>
 </head>
 <body>
 
-<div class="scroll-progress"><div class="bar" id="scrollBar"></div></div>
+<!-- ===================== ICON SPRITE (no CDN) ===================== -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"/></symbol>
+  <symbol id="i-school" viewBox="0 0 24 24"><path d="M3 21h18M5.2 21V10.6L12 6.2l6.8 4.4V21M9.6 21v-4.8h4.8V21M12 3v3.2"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21c4.6-4.3 7-7.8 7-10.7A7 7 0 0 0 5 10.3C5 13.2 7.4 16.7 12 21Z"/><circle cx="12" cy="10.3" r="2.5"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2.6 9 12 4.4 21.4 9 12 13.6 2.6 9Z"/><path d="M6.6 11.1v4.7c0 1.5 2.4 2.7 5.4 2.7s5.4-1.2 5.4-2.7v-4.7"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.3V12l3.2 2"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.4 11.6c0 3.8-3.7 6.9-8.2 6.9-.9 0-1.8-.1-2.6-.4L4.8 20l1.3-3.4a6.4 6.4 0 0 1-2.5-5c0-3.8 3.7-6.9 8.2-6.9s8.6 3.1 8.6 6.9Z"/><path d="M8.6 10.4h6.8M8.6 13.4h4.2"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M13.6 3H7.2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9.6a2 2 0 0 0 2-2V8.4L13.6 3Z"/><path d="M13.6 3v5.4H19M8.6 13h6.8M8.6 16.4h4.6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M10.2 6.8h9.2M10.2 12h9.2M10.2 17.2h9.2"/><path d="m4 6.4 1.3 1.3 2.4-2.4M4 11.6l1.3 1.3 2.4-2.4M4 16.8l1.3 1.3 2.4-2.4"/></symbol>
+  <symbol id="i-board" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="11.4" rx="1.8"/><path d="M7.4 7.2h9.2M7.4 10.4h5.6"/><circle cx="8.4" cy="18" r="1.7"/><path d="M5 21.2a3.4 3.4 0 0 1 6.8 0M15 18h4.6M15 21.2h4.6"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 7S9.9 5 6.2 5H3.2v12.6h3.4c3.4 0 5.4 1.8 5.4 1.8s2-1.8 5.4-1.8h3.4V5h-3c-3.7 0-5.8 2-5.8 2Z"/><path d="M12 7v12.4"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9.2" y="2.8" width="5.6" height="9.8" rx="2.8"/><path d="M5.6 11a6.4 6.4 0 0 0 12.8 0M12 17.6v3.2M9 20.8h6"/></symbol>
+  <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="m6.1 6.1 11.8 11.8"/></symbol>
+  <symbol id="i-noone" viewBox="0 0 24 24"><path d="M15.3 8.6a3.4 3.4 0 0 1-4.8 3.1M8.8 5.6a3.4 3.4 0 0 1 4.6 1.2"/><path d="M4.6 20a7.4 7.4 0 0 1 10.6-6"/><path d="m3.6 3.6 16.8 16.8"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4.6 3.6 6.9v12.6L9 17.2l6 2.3 5.4-2.3V4.6L15 6.9 9 4.6Z"/><path d="M9 4.6v12.6M15 6.9v12.6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2"/><path d="m4 6.6 8 5.8 8-5.8"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M4.4 16.4h15.2M6 16.4v-4.6l1.7-3.9a2 2 0 0 1 1.8-1.2h5a2 2 0 0 1 1.8 1.2l1.7 3.9v4.6"/><path d="M6 11.8h12"/><circle cx="8.2" cy="18.2" r="1.6"/><circle cx="15.8" cy="18.2" r="1.6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.8 12.4 4.8 4.8L19.4 6.6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 5.6v8.2M12 18.2h.01"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17" cy="7" r="1.05" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-li" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="4"/><path d="M7.6 10.4v6.6"/><circle cx="7.6" cy="7.4" r="1.1" fill="currentColor" stroke="none"/><path d="M11.8 17v-6.6M11.8 13.6a2.6 2.6 0 0 1 5.2 0V17"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path d="M14.2 3.6v10.6a3.8 3.8 0 1 1-3.8-3.8c.35 0 .7.05 1 .14"/><path d="M14.2 3.6a5.2 5.2 0 0 0 5.2 5.2"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="4"/><path d="m10.4 9.2 5.2 2.8-5.2 2.8V9.2Z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7.5h16M4 12h16M4 16.5h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></symbol>
+</svg>
 
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="logo.svg" alt="Clinically" class="nav-logo-img">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#what">What We Do</a></li>
-    <li><a href="#why">Why It Matters</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#area">Where We Go</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">
-    Book a Presentation
-    <i class="fa-solid fa-arrow-right"></i>
-  </a>
-</nav>
+<div class="progress"><span id="bar"></span></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
+<!-- ===================== MASTHEAD ===================== -->
+<header class="masthead" id="masthead">
+  <div class="shell">
+    <div class="masthead-inner">
+      <a href="#top" class="brand" aria-label="Clinically — home">
+        <img src="logo.svg" alt="Clinically">
+      </a>
 
-  <span class="plus-sign" style="top: 15%; left: 8%; font-size: 48px; animation-delay: 0s;">+</span>
-  <span class="plus-sign" style="top: 25%; right: 12%; font-size: 32px; animation-delay: 1s;">+</span>
-  <span class="plus-sign" style="bottom: 30%; left: 15%; font-size: 24px; animation-delay: 2s;">+</span>
-  <span class="plus-sign" style="top: 60%; right: 8%; font-size: 40px; animation-delay: 1.5s;">+</span>
-  <span class="plus-sign" style="bottom: 22%; right: 30%; font-size: 28px; animation-delay: 3s;">+</span>
+      <nav>
+        <ul class="nav">
+          <li><a href="#what">What We Do</a></li>
+          <li><a href="#why">Why It Matters</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#area">Where We Go</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
 
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-left" data-aos="fade-right">
-        <div class="hero-tag">
-          <span class="pulse"></span>
+      <a href="#contact" class="nav-cta">
+        Book a Presentation
+        <svg class="ico" style="font-size:16px"><use href="#i-arrow"></use></svg>
+      </a>
+
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg class="ico" id="burgerIcon" style="font-size:22px"><use href="#i-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer">
+    <div class="shell">
+      <ul>
+        <li><a href="#what">What We Do <svg class="ico"><use href="#i-arrow"></use></svg></a></li>
+        <li><a href="#why">Why It Matters <svg class="ico"><use href="#i-arrow"></use></svg></a></li>
+        <li><a href="#process">Process <svg class="ico"><use href="#i-arrow"></use></svg></a></li>
+        <li><a href="#area">Where We Go <svg class="ico"><use href="#i-arrow"></use></svg></a></li>
+        <li><a href="#contact">Book a Presentation <svg class="ico"><use href="#i-arrow"></use></svg></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero on-dark" id="top">
+  <span class="hero-plus" style="top:18%; right:9%; font-size:52px;">+</span>
+  <span class="hero-plus" style="top:62%; right:4%; font-size:30px; animation-delay:1.2s;">+</span>
+  <span class="hero-plus" style="bottom:12%; left:6%; font-size:38px; animation-delay:2.4s;">+</span>
+  <span class="hero-plus" style="top:34%; left:2%; font-size:22px; animation-delay:3.1s;">+</span>
+
+  <div class="shell">
+
+    <div class="lockup">
+      <div class="lockup-logo">
+        <img src="logo.svg" alt="Clinically">
+      </div>
+      <div class="lockup-note">
+        Youth-led · Nonprofit<br>
+        <b>Metro Detroit, Michigan</b>
+      </div>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <div class="tag">
+          <span class="dot"></span>
           Now booking Metro Detroit schools for 2026–2027
         </div>
-        <h1>
-          We bring the road to medicine <span class="gradient">into your classroom.</span>
-        </h1>
-        <p class="hero-sub">
+
+        <h1 class="h-xl">We bring the road to medicine <em>into your classroom.</em></h1>
+
+        <p class="lede hero-lede">
           Clinically is a youth-led initiative delivering premed education directly to high schools across Metro Detroit — turning curiosity about medicine into a clear, actionable path forward for the next generation of doctors.
         </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">
+
+        <div class="actions">
+          <a href="#contact" class="btn btn-solid">
             Bring Clinically to Your School
-            <i class="fa-solid fa-arrow-right"></i>
+            <svg class="ico" style="font-size:17px"><use href="#i-arrow"></use></svg>
           </a>
-          <a href="#what" class="btn btn-ghost">
-            See What We Cover
-          </a>
+          <a href="#what" class="btn btn-line">See What We Cover</a>
         </div>
-        <div class="hero-trust">
-          <div class="hero-mini-info">
-            <i class="fa-solid fa-school"></i>
-            Free for schools
-          </div>
-          <div class="hero-mini-info">
-            <i class="fa-solid fa-location-dot"></i>
-            In person, Metro Detroit
-          </div>
-          <div class="hero-mini-info">
-            <i class="fa-solid fa-graduation-cap"></i>
-            Grades 9–12
-          </div>
+
+        <div class="trust">
+          <span><svg class="ico"><use href="#i-school"></use></svg> Free for schools</span>
+          <span><svg class="ico"><use href="#i-pin"></use></svg> In person, Metro Detroit</span>
+          <span><svg class="ico"><use href="#i-cap"></use></svg> Grades 9–12</span>
         </div>
       </div>
 
-      <div class="hero-right" data-aos="fade-left" data-aos-delay="200">
-        <div class="hero-card">
-          <div class="hero-card-top">
-            <div class="label">Session Overview</div>
-            <div class="duration-badge">
-              <i class="fa-regular fa-clock"></i> 45–60 mins
-            </div>
-          </div>
+      <aside class="card">
+        <div class="card-top">
+          <span class="k">Session Overview</span>
+          <span class="v"><svg class="ico" style="font-size:14px"><use href="#i-clock"></use></svg> 45–60 mins</span>
+        </div>
+        <div class="card-body">
+          <div class="mini-title">What's included</div>
 
-          <div class="session-snapshot">
-            <div class="snapshot-title">What's included</div>
-            <div class="snapshot-item">
-              <div class="icon-box"><i class="fa-solid fa-comments"></i></div>
-              <div class="text">
-                <span>Interactive Q&amp;A</span>
+          <div class="incl">
+            <div class="incl-row">
+              <span class="bx"><svg class="ico"><use href="#i-chat"></use></svg></span>
+              <div class="txt">
+                <b>Interactive Q&amp;A</b>
                 <p>Students ask real questions and get honest answers from current premeds.</p>
               </div>
             </div>
-            <div class="snapshot-item">
-              <div class="icon-box"><i class="fa-solid fa-file-lines"></i></div>
-              <div class="text">
-                <span>Printed Roadmaps</span>
+            <div class="incl-row">
+              <span class="bx"><svg class="ico"><use href="#i-doc"></use></svg></span>
+              <div class="txt">
+                <b>Printed Roadmaps</b>
                 <p>Every student leaves with a physical, step-by-step premed timeline.</p>
               </div>
             </div>
-            <div class="snapshot-item">
-              <div class="icon-box"><i class="fa-solid fa-list-check"></i></div>
-              <div class="text">
-                <span>Course Access</span>
+            <div class="incl-row">
+              <span class="bx"><svg class="ico"><use href="#i-list"></use></svg></span>
+              <div class="txt">
+                <b>Course Access</b>
                 <p>Interested students get access to our curated college and admissions course tracks.</p>
               </div>
             </div>
           </div>
 
-          <div class="roadmap">
-            <div class="roadmap-step done">
-              <span class="num">01</span>
-              <span class="title">High School</span>
-              <span class="meta">Completed</span>
-            </div>
-            <div class="roadmap-step current">
-              <span class="num">02</span>
-              <span class="title">Premed Pathway</span>
-              <span class="meta">In session</span>
-            </div>
-            <div class="roadmap-step">
-              <span class="num">03</span>
-              <span class="title">Medical School</span>
-              <span class="meta">Upcoming</span>
-            </div>
-            <div class="roadmap-step">
-              <span class="num">04</span>
-              <span class="title">Residency &amp; Beyond</span>
-              <span class="meta">Future</span>
-            </div>
+          <div class="track">
+            <div class="track-row done"><span class="n">01</span><span class="t">High School</span><span class="m">Completed</span></div>
+            <div class="track-row now"><span class="n">02</span><span class="t">Premed Pathway</span><span class="m">In session</span></div>
+            <div class="track-row"><span class="n">03</span><span class="t">Medical School</span><span class="m">Upcoming</span></div>
+            <div class="track-row"><span class="n">04</span><span class="t">Residency &amp; Beyond</span><span class="m">Future</span></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MARQUEE: two identical groups, animates exactly -50% for a seamless loop -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="marqueeTrack">
-      <ul class="marquee-group">
-        <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
-      </ul>
-      <ul class="marquee-group">
-        <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
-      </ul>
+      </aside>
     </div>
   </div>
 </section>
 
-<!-- WHAT WE DO -->
-<section class="what-we-do" id="what">
-  <div class="container">
-    <div class="section-head" data-aos="fade-up">
-      <span class="section-tag">What we do</span>
-      <h2 class="section-title">Programs built for <em>curious classrooms.</em></h2>
-      <p class="section-sub">We design every Clinically session to fit into a single class period — 45 to 60 minutes of focused, honest, and interactive conversation about what it really takes to enter medicine. Every program happens in person, in Michigan schools.</p>
+<!-- ===================== MARQUEE ===================== -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="stripTrack">
+    <ul class="strip-group">
+      <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
+    </ul>
+    <ul class="strip-group">
+      <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== WHAT WE DO ===================== -->
+<section class="band band-cream" id="what">
+  <div class="shell">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">What we do</span>
+      <h2 class="h-lg">Programs built for <em>curious classrooms.</em></h2>
+      <p class="lede">We design every Clinically session to fit into a single class period — 45 to 60 minutes of focused, honest, and interactive conversation about what it really takes to enter medicine. Every program happens in person, in Michigan schools.</p>
     </div>
 
-    <div class="programs-grid">
-      <div class="program-card" data-aos="fade-up">
-        <div class="program-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+    <div class="bento">
+      <article class="tile" data-reveal>
+        <span class="tile-n">01</span>
+        <span class="tile-ico"><svg class="ico"><use href="#i-board"></use></svg></span>
         <h3>In-School Presentations</h3>
         <p>Our flagship program. A trained Clinically presenter comes to your school and delivers a tailored, interactive talk that demystifies the premed pathway — from high school course selection to med school applications.</p>
-        <ul>
-          <li>45–60 min</li>
-          <li>Grades 9–12</li>
-          <li>Free for schools</li>
-        </ul>
-      </div>
+        <ul class="chips"><li>45–60 min</li><li>Grades 9–12</li><li>Free for schools</li></ul>
+      </article>
 
-      <div class="program-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="program-icon"><i class="fa-solid fa-list-check"></i></div>
+      <article class="tile" data-reveal>
+        <span class="tile-n">02</span>
+        <span class="tile-ico"><svg class="ico"><use href="#i-list"></use></svg></span>
         <h3>Curated Course Tracks</h3>
         <p>We build short, focused courses for students aiming at colleges and universities with strong medical pathways — which high school classes actually matter, how premed, nursing, and BS/MD programs differ, what each application really asks for, and how to build a profile that gets in.</p>
-        <ul>
-          <li>Admissions-focused</li>
-          <li>College &amp; program lists</li>
-          <li>Built by current premeds</li>
-        </ul>
-      </div>
+        <ul class="chips"><li>Admissions-focused</li><li>College &amp; program lists</li><li>Built by current premeds</li></ul>
+      </article>
 
-      <div class="program-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="program-icon"><i class="fa-solid fa-book-open"></i></div>
+      <article class="tile" data-reveal>
+        <span class="tile-n">03</span>
+        <span class="tile-ico"><svg class="ico"><use href="#i-book"></use></svg></span>
         <h3>Resource Library</h3>
         <p>A growing, free library of guides, timelines, and printable planning tools — covering everything from high school course selection to Michigan summer programs, shadowing etiquette, and MCAT prep timelines.</p>
-        <ul>
-          <li>Always free</li>
-          <li>Printed + PDF</li>
-          <li>Updated yearly</li>
-        </ul>
-      </div>
+        <ul class="chips"><li>Always free</li><li>Printed + PDF</li><li>Updated yearly</li></ul>
+      </article>
 
-      <div class="program-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="program-icon"><i class="fa-solid fa-microphone"></i></div>
+      <article class="tile" data-reveal>
+        <span class="tile-n">04</span>
+        <span class="tile-ico"><svg class="ico"><use href="#i-mic"></use></svg></span>
         <h3>Med Student Panels</h3>
         <p>On-site panels featuring current medical students from Michigan schools and a range of specialties. Students submit questions in advance and hear honest, lived-experience answers from people who just walked the path.</p>
-        <ul>
-          <li>In person</li>
-          <li>By request</li>
-          <li>Q&amp;A format</li>
-        </ul>
-      </div>
+        <ul class="chips"><li>In person</li><li>By request</li><li>Q&amp;A format</li></ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- WHY IT MATTERS -->
-<section class="why-matters" id="why">
-  <div class="container">
-    <div class="section-head" data-aos="fade-up">
-      <span class="section-tag">Why it matters</span>
-      <h2 class="section-title">The premed path is <em>opaque.</em> We're making it readable.</h2>
-      <p class="section-sub">Most high school students interested in medicine have no access to premed advising. The result? Talented students — especially those from underrepresented backgrounds — walk away from the path before they even start.</p>
+<!-- ===================== WHY IT MATTERS ===================== -->
+<section class="band band-paper" id="why">
+  <div class="shell">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">Why it matters</span>
+      <h2 class="h-lg">The premed path is <em>opaque.</em><br>We're making it readable.</h2>
+      <p class="lede">Most high school students interested in medicine have no access to premed advising. The result? Talented students — especially those from underrepresented backgrounds — walk away from the path before they even start.</p>
     </div>
 
-    <div class="why-grid">
-      <div class="why-points">
-        <div class="why-point" data-aos="fade-right">
-          <div class="point-icon"><i class="fa-solid fa-ban"></i></div>
+    <div class="why-wrap">
+      <div class="why-list" data-reveal>
+        <div class="why-item">
+          <span class="bx"><svg class="ico"><use href="#i-ban"></use></svg></span>
           <div>
             <h4>No Access</h4>
             <p>Most high schools offer no premed or health-career advising. Students are left to figure out a complex, high-stakes path entirely on their own — or not at all.</p>
           </div>
         </div>
-        <div class="why-point" data-aos="fade-right" data-aos-delay="100">
-          <div class="point-icon"><i class="fa-solid fa-user-slash"></i></div>
+        <div class="why-item">
+          <span class="bx"><svg class="ico"><use href="#i-noone"></use></svg></span>
           <div>
             <h4>No Mentorship</h4>
             <p>Without guidance, talented students — especially those who are first-generation — often abandon the pathway before they even start college, due to lack of information, not lack of ability.</p>
           </div>
         </div>
-        <div class="why-point" data-aos="fade-right" data-aos-delay="200">
-          <div class="point-icon"><i class="fa-solid fa-map"></i></div>
+        <div class="why-item">
+          <span class="bx"><svg class="ico"><use href="#i-map"></use></svg></span>
           <div>
             <h4>No Roadmap</h4>
             <p>The medical school pathway is opaque. Requirements, timelines, and exams can feel impossible to navigate without a clear, step-by-step map laid out by someone who has done it.</p>
@@ -1867,47 +1370,42 @@ footer {
         </div>
       </div>
 
-      <div class="why-quote" data-aos="fade-left">
-        <div class="quote-mark">"</div>
-        <blockquote>
-          I thought you had to be rich, or know a doctor, to even consider medical school. Clinically was the first time someone told me, step by step, how a kid like me could actually get there. Two years later, I'm a biology major prepping for the MCAT.
-        </blockquote>
-        <cite>
-          Maya R.
-          <span>Pilot program student · Metro Detroit · now premed undergrad</span>
-        </cite>
-      </div>
+      <figure class="quote" data-reveal>
+        <div class="mark">&ldquo;</div>
+        <blockquote>I thought you had to be rich, or know a doctor, to even consider medical school. Clinically was the first time someone told me, step by step, how a kid like me could actually get there. Two years later, I'm a biology major prepping for the MCAT.</blockquote>
+        <cite>Maya R.<span>Pilot program student · Metro Detroit · now premed undergrad</span></cite>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
-<section class="process" id="process">
-  <div class="container">
-    <div class="section-head" data-aos="fade-up">
-      <span class="section-tag">How it works</span>
-      <h2 class="section-title">Booking is <em>simple.</em> Four steps.</h2>
-      <p class="section-sub">From first email to presentation day, the process takes about two weeks. We handle content, materials, and presenter coordination — you just provide the classroom.</p>
+<!-- ===================== PROCESS ===================== -->
+<section class="band band-ink on-dark" id="process">
+  <div class="shell">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">How it works</span>
+      <h2 class="h-lg">Booking is <em>simple.</em> Four steps.</h2>
+      <p class="lede">From first email to presentation day, the process takes about two weeks. We handle content, materials, and presenter coordination — you just provide the classroom.</p>
     </div>
 
-    <div class="process-steps">
-      <div class="step" data-aos="fade-up">
-        <div class="step-num">01</div>
+    <div class="steps">
+      <div class="step" data-reveal>
+        <div class="num">01</div>
         <h3>Reach Out</h3>
         <p>Submit the booking form below with your school, audience, and preferred dates. Takes less than three minutes.</p>
       </div>
-      <div class="step" data-aos="fade-up" data-aos-delay="100">
-        <div class="step-num">02</div>
+      <div class="step" data-reveal>
+        <div class="num">02</div>
         <h3>Tailor Together</h3>
         <p>We schedule a 15-minute call to understand your students' needs and pick the right focus and presenter.</p>
       </div>
-      <div class="step" data-aos="fade-up" data-aos-delay="200">
-        <div class="step-num">03</div>
+      <div class="step" data-reveal>
+        <div class="num">03</div>
         <h3>We Present</h3>
         <p>Our presenter drives out to your school and delivers the session in your classroom — interactive, real, and on time.</p>
       </div>
-      <div class="step" data-aos="fade-up" data-aos-delay="300">
-        <div class="step-num">04</div>
+      <div class="step" data-reveal>
+        <div class="num">04</div>
         <h3>Follow-Up</h3>
         <p>Students leave with a printed roadmap, access to our resource library, and an invite to our curated course tracks.</p>
       </div>
@@ -1915,19 +1413,23 @@ footer {
   </div>
 </section>
 
-<!-- SERVICE AREA -->
-<section class="area" id="area">
-  <div class="container">
-    <div class="area-grid">
-      <div data-aos="fade-right">
-        <span class="section-tag">Where we go</span>
-        <h2 class="section-title">Michigan only. <em>In person, always.</em></h2>
-        <p class="section-sub">Clinically is based in Metro Detroit, and every session is delivered face-to-face in your building. We don't run virtual or online presentations — the conversations that change a student's mind happen in the room.</p>
+<!-- ===================== WHERE WE GO ===================== -->
+<section class="band band-cream" id="area">
+  <div class="shell">
+    <div class="area-wrap">
+      <div data-reveal>
+        <span class="eyebrow">Where we go</span>
+        <h2 class="h-lg">Michigan only.<br><em>In person, always.</em></h2>
+        <p class="lede" style="margin-top:18px">Clinically is based in Metro Detroit, and every session is delivered face-to-face in your building. We don't run virtual or online presentations — the conversations that change a student's mind happen in the room.</p>
+        <div class="area-badge">
+          <svg class="ico"><use href="#i-pin"></use></svg>
+          Southeast Michigan
+        </div>
       </div>
 
-      <div class="area-map" data-aos="fade-left" data-aos-delay="100">
+      <div class="area-panel" data-reveal>
         <h4>Counties &amp; communities we serve</h4>
-        <div class="area-chips">
+        <div class="pins">
           <span>Wayne County</span>
           <span>Oakland County</span>
           <span>Macomb County</span>
@@ -1942,132 +1444,118 @@ footer {
           <span>Sterling Heights</span>
         </div>
         <p class="area-note">
-          <i class="fa-solid fa-car-side"></i>&nbsp; Outside this list but still in Michigan? Reach out anyway — if we can drive to you, we will.
+          <svg class="ico"><use href="#i-car"></use></svg>
+          Outside this list but still in Michigan? Reach out anyway — if we can drive to you, we will.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="container">
-    <div class="section-head" data-aos="fade-up">
-      <span class="section-tag">From the classroom</span>
-      <h2 class="section-title">What teachers and <em>students say.</em></h2>
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="band band-paper">
+  <div class="shell">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">From the classroom</span>
+      <h2 class="h-lg">What teachers and <em>students say.</em></h2>
     </div>
 
-    <div class="testimonials-grid">
-      <div class="testimonial" data-aos="fade-up">
+    <div class="says">
+      <article class="say" data-reveal>
         <div class="stars">★★★★★</div>
-        <blockquote>
-          Our students kept asking questions for 20 minutes after the bell rang. The presenter was honest about how hard the path is — but also made it feel genuinely possible. That's rare.
-        </blockquote>
-        <div class="author">
-          <div class="avatar">DT</div>
-          <div>
-            <div class="name">Daniel Torres</div>
-            <div class="role">Biology Teacher · Wayne County</div>
-          </div>
+        <blockquote>Our students kept asking questions for 20 minutes after the bell rang. The presenter was honest about how hard the path is — but also made it feel genuinely possible. That's rare.</blockquote>
+        <div class="who">
+          <span class="av">DT</span>
+          <div class="txt"><b>Daniel Torres</b><small>Biology Teacher · Wayne County</small></div>
         </div>
-      </div>
+      </article>
 
-      <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
+      <article class="say" data-reveal>
         <div class="stars">★★★★★</div>
-        <blockquote>
-          I'd been told my whole life that I should be a doctor, but nobody ever explained what that actually meant. Clinically was the first time someone drew the path out for me, step by step.
-        </blockquote>
-        <div class="author">
-          <div class="avatar">SP</div>
-          <div>
-            <div class="name">Sara P.</div>
-            <div class="role">11th grade · Oakland County</div>
-          </div>
+        <blockquote>I'd been told my whole life that I should be a doctor, but nobody ever explained what that actually meant. Clinically was the first time someone drew the path out for me, step by step.</blockquote>
+        <div class="who">
+          <span class="av">SP</span>
+          <div class="txt"><b>Sara P.</b><small>11th grade · Oakland County</small></div>
         </div>
-      </div>
+      </article>
 
-      <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
+      <article class="say" data-reveal>
         <div class="stars">★★★★★</div>
-        <blockquote>
-          We've hosted three Clinically sessions this year. Each one is well-structured, age-appropriate, and grounded. They've become a fixture of our health careers program.
-        </blockquote>
-        <div class="author">
-          <div class="avatar">LM</div>
-          <div>
-            <div class="name">Linda Mwangi</div>
-            <div class="role">Counselor · Macomb County</div>
-          </div>
+        <blockquote>We've hosted three Clinically sessions this year. Each one is well-structured, age-appropriate, and grounded. They've become a fixture of our health careers program.</blockquote>
+        <div class="who">
+          <span class="av">LM</span>
+          <div class="txt"><b>Linda Mwangi</b><small>Counselor · Macomb County</small></div>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-info" data-aos="fade-right">
-        <span class="section-tag">Bring us in</span>
-        <h2 class="section-title">Book a Clinically session for your school.</h2>
-        <p class="section-sub">Fill out the form and we'll be in touch within 48 hours. Presentations are free for Michigan schools — we just need a classroom and a curious audience.</p>
+<!-- ===================== CONTACT ===================== -->
+<section class="band band-mint" id="contact">
+  <div class="shell">
+    <div class="contact-wrap">
+      <div data-reveal>
+        <span class="eyebrow">Bring us in</span>
+        <h2 class="h-lg">Book a Clinically session for your school.</h2>
+        <p class="lede" style="margin-top:18px">Fill out the form and we'll be in touch within 48 hours. Presentations are free for Michigan schools — we just need a classroom and a curious audience.</p>
 
-        <div class="contact-meta">
-          <div class="contact-meta-item">
-            <div class="icon"><i class="fa-regular fa-envelope"></i></div>
-            <div>
-              <div class="label">Email us</div>
-              <a class="value contact-value" href="/cdn-cgi/l/email-protection#8deee1e4e3e4eeece1e1f4e0e4eee5e4eaece3cdeae0ece4e1a3eee2e0"><span class="__cf_email__" data-cfemail="b4d7d8dddaddd7d5d8d8cdd9ddd7dcddd3d5daf4d3d9d5ddd89ad7dbd9">[email&#160;protected]</span></a>
+        <div class="meta">
+          <div class="meta-row">
+            <span class="bx"><svg class="ico"><use href="#i-mail"></use></svg></span>
+            <div class="txt">
+              <span class="k">Email us</span>
+              <a class="v" href="/cdn-cgi/l/email-protection#4526292c2b2c262429293c282c262d2c22242b052228242c296b262a28"><span class="__cf_email__" data-cfemail="6407080d0a0d070508081d090d070c0d03050a240309050d084a070b09">[email&#160;protected]</span></a>
             </div>
           </div>
-          <div class="contact-meta-item">
-            <div class="icon"><i class="fa-solid fa-clock"></i></div>
-            <div>
-              <div class="label">Response time</div>
-              <div class="value">Within 48 hours, weekdays</div>
+          <div class="meta-row">
+            <span class="bx"><svg class="ico"><use href="#i-clock"></use></svg></span>
+            <div class="txt">
+              <span class="k">Response time</span>
+              <span class="v">Within 48 hours, weekdays</span>
             </div>
           </div>
-          <div class="contact-meta-item">
-            <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <div class="label">Service area</div>
-              <div class="value">Metro Detroit, Michigan · In-person only</div>
+          <div class="meta-row">
+            <span class="bx"><svg class="ico"><use href="#i-pin"></use></svg></span>
+            <div class="txt">
+              <span class="k">Service area</span>
+              <span class="v">Metro Detroit, Michigan · In-person only</span>
             </div>
           </div>
         </div>
       </div>
 
-      <form class="contact-form" id="bookingForm" data-aos="fade-left" data-aos-delay="100">
+      <form class="form" id="bookingForm" novalidate data-reveal>
         <div class="form-head">
           <h3>School Booking Request</h3>
-          <p>All fields marked with <span style="color: var(--coral);">*</span> are required.</p>
+          <p>All fields marked with <i style="color:var(--coral); font-style:normal">*</i> are required.</p>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-school">School name <span class="req">*</span></label>
-            <input id="f-school" type="text" name="school" placeholder="e.g. Novi High School" required>
+        <div class="pair">
+          <div class="field">
+            <label for="f-school">School name <i>*</i></label>
+            <input id="f-school" name="school" type="text" placeholder="e.g. Novi High School" required>
           </div>
-          <div class="form-group">
-            <label for="f-name">Contact name <span class="req">*</span></label>
-            <input id="f-name" type="text" name="name" placeholder="Your full name" required>
+          <div class="field">
+            <label for="f-name">Contact name <i>*</i></label>
+            <input id="f-name" name="name" type="text" placeholder="Your full name" required>
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-email">Email <span class="req">*</span></label>
-            <input id="f-email" type="email" name="email" placeholder="you@school.edu" required>
+        <div class="pair">
+          <div class="field">
+            <label for="f-email">Email <i>*</i></label>
+            <input id="f-email" name="email" type="email" placeholder="you@school.edu" required>
           </div>
-          <div class="form-group">
+          <div class="field">
             <label for="f-phone">Phone (optional)</label>
-            <input id="f-phone" type="tel" name="phone" placeholder="(248) 000-0000">
+            <input id="f-phone" name="phone" type="tel" placeholder="(248) 000-0000">
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-role">Your role <span class="req">*</span></label>
+        <div class="pair">
+          <div class="field">
+            <label for="f-role">Your role <i>*</i></label>
             <select id="f-role" name="role" required>
               <option value="">Select your role</option>
               <option>Teacher</option>
@@ -2078,8 +1566,8 @@ footer {
               <option>Other</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="f-grade">Audience grade <span class="req">*</span></label>
+          <div class="field">
+            <label for="f-grade">Audience grade <i>*</i></label>
             <select id="f-grade" name="grade" required>
               <option value="">Select grade range</option>
               <option>9th grade</option>
@@ -2091,30 +1579,30 @@ footer {
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="f-city">School city <span class="req">*</span></label>
-            <input id="f-city" type="text" name="city" placeholder="e.g. Wixom, MI" required>
+        <div class="pair">
+          <div class="field">
+            <label for="f-city">School city <i>*</i></label>
+            <input id="f-city" name="city" type="text" placeholder="e.g. Wixom, MI" required>
           </div>
-          <div class="form-group">
+          <div class="field">
             <label for="f-size">Estimated audience size</label>
-            <input id="f-size" type="number" name="size" placeholder="e.g. 30" min="1">
+            <input id="f-size" name="size" type="number" min="1" placeholder="e.g. 30">
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="field">
           <label for="f-dates">Preferred dates or timeframe</label>
-          <input id="f-dates" type="text" name="dates" placeholder="e.g. late October, 3rd hour">
+          <input id="f-dates" name="dates" type="text" placeholder="e.g. late October, 3rd hour">
         </div>
 
-        <div class="form-group">
-          <label for="f-message">Anything else? (optional)</label>
-          <textarea id="f-message" name="message" placeholder="What you'd like covered, special context, specific student questions, etc."></textarea>
+        <div class="field">
+          <label for="f-msg">Anything else? (optional)</label>
+          <textarea id="f-msg" name="message" placeholder="What you'd like covered, special context, specific student questions, etc."></textarea>
         </div>
 
-        <button type="submit" class="form-submit">
+        <button type="submit" class="btn btn-ink submit">
           Submit Booking Request
-          <i class="fa-solid fa-arrow-right"></i>
+          <svg class="ico" style="font-size:17px"><use href="#i-arrow"></use></svg>
         </button>
 
         <p class="form-note">We'll respond within 48 hours to schedule a brief planning call.</p>
@@ -2123,24 +1611,22 @@ footer {
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo">
-          <img src="logo.svg" alt="Clinically" class="nav-logo-img footer-logo-img">
-        </a>
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" aria-label="Clinically — home"><img src="logo.svg" alt="Clinically"></a>
         <p>A youth-led initiative bringing premed education into Metro Detroit classrooms — making the path to medicine clear, honest, and possible for every student.</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/clin_ically/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Clinically on Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <div class="social">
+          <a href="https://www.instagram.com/clin_ically/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Clinically on Instagram"><svg class="ico"><use href="#i-ig"></use></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg class="ico"><use href="#i-li"></use></svg></a>
+          <a href="#" aria-label="TikTok"><svg class="ico"><use href="#i-tt"></use></svg></a>
+          <a href="#" aria-label="YouTube"><svg class="ico"><use href="#i-yt"></use></svg></a>
         </div>
       </div>
 
-      <div class="footer-col">
+      <div class="foot-col">
         <h4>Programs</h4>
         <ul>
           <li><a href="#what">In-School Talks</a></li>
@@ -2150,11 +1636,11 @@ footer {
         </ul>
       </div>
 
-      <div class="footer-col">
+      <div class="foot-col">
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#cba8a7a2a5a2a8aaa7a7b2a6a2a8a3a2acaaa58baca6aaa2a7e5a8a4a6"><span class="__cf_email__" data-cfemail="1a7976737473797b76766377737972737d7b745a7d777b737634797577">[email&#160;protected]</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#a0c3ccc9cec9c3c1ccccd9cdc9c3c8c9c7c1cee0c7cdc1c9cc8ec3cfcd"><span class="__cf_email__" data-cfemail="ef8c838681868c8e83839682868c8786888e81af88828e8683c18c8082">[email&#160;protected]</span></a></li>
           <li><a href="#area">Service area</a></li>
           <li><a href="#contact">Partner with us</a></li>
           <li><a href="#contact">Volunteer</a></li>
@@ -2162,156 +1648,162 @@ footer {
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div>Clinically — a nonprofit educational initiative serving Metro Detroit, Michigan.</div>
-      <div>Made with care for the next generation of doctors.</div>
+    <div class="foot-mark">
+      <span>Clinically — a nonprofit educational initiative serving Metro Detroit, Michigan.</span>
+      <span>Made with care for the next generation of doctors.</span>
+    </div>
+
+    <div class="watermark" aria-hidden="true">
+      <img src="logo.svg" alt="">
     </div>
   </div>
 </footer>
 
-<!-- TOAST -->
 <div class="toast" id="toast">
-  <div class="icon"><i class="fa-solid fa-check"></i></div>
-  <span id="toastMessage">Request received — we'll be in touch within 48 hours.</span>
+  <span class="bx"><svg class="ico" id="toastIcon" style="font-size:14px"><use href="#i-check"></use></svg></span>
+  <span id="toastText">Request received — we'll be in touch within 48 hours.</span>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
   'use strict';
 
-  /* ---------------------------------------------------------
-     AOS — guarded so a blocked/failed CDN never kills the rest
-     of the page's JavaScript (this was breaking the marquee).
-  --------------------------------------------------------- */
-  if (window.AOS && typeof window.AOS.init === 'function') {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 80
-    });
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- reveal on scroll (no library) ---------------- */
+  var revealables = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var siblings = Array.prototype.slice.call(el.parentNode.children).indexOf(el);
+        el.style.transitionDelay = Math.min(siblings, 4) * 90 + 'ms';
+        el.classList.add('seen');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealables.forEach(function (el) { io.observe(el); });
   } else {
-    document.querySelectorAll('[data-aos]').forEach(function (el) {
-      el.removeAttribute('data-aos');
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
+    revealables.forEach(function (el) { el.classList.add('seen'); });
   }
 
-  /* ---------------------------------------------------------
-     MARQUEE — speed scales with content width so the loop
-     runs at a constant px/sec no matter the viewport.
-  --------------------------------------------------------- */
-  var track = document.getElementById('marqueeTrack');
-  if (track) {
-    var setMarqueeSpeed = function () {
-      var group = track.querySelector('.marquee-group');
-      if (!group) return;
-      var width = group.getBoundingClientRect().width;
-      if (!width) return;
-      var pxPerSecond = 60;
-      track.style.animationDuration = (width / pxPerSecond).toFixed(2) + 's';
-    };
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(setMarqueeSpeed).catch(function () {});
-    }
-    window.addEventListener('load', setMarqueeSpeed);
-    window.addEventListener('resize', setMarqueeSpeed, { passive: true });
-    setMarqueeSpeed();
-  }
+  /* ---------------- masthead state + mobile drawer ---------------- */
+  var masthead = document.getElementById('masthead');
+  var burger = document.getElementById('burger');
+  var burgerIcon = document.getElementById('burgerIcon');
 
-  /* --------------------------- SCROLL PROGRESS --------------------------- */
-  var scrollBar = document.getElementById('scrollBar');
-  var updateProgress = function () {
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-    scrollBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  var setStuck = function () {
+    masthead.classList.toggle('is-stuck', window.scrollY > 24);
   };
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress, { passive: true });
-  updateProgress();
+  setStuck();
 
-  /* ------------------------------- TOAST -------------------------------- */
-  var toast = document.getElementById('toast');
-  var toastMessage = document.getElementById('toastMessage');
-  var toastIcon = toast.querySelector('.icon i');
-  var toastTimer;
+  var closeDrawer = function () {
+    masthead.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    burgerIcon.innerHTML = '<use href="#i-menu"></use>';
+  };
+  burger.addEventListener('click', function () {
+    var open = masthead.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burgerIcon.innerHTML = open ? '<use href="#i-close"></use>' : '<use href="#i-menu"></use>';
+  });
 
-  function showToast(message, isError) {
-    toastMessage.textContent = message;
-    toast.classList.toggle('error', !!isError);
-    if (toastIcon) toastIcon.className = isError ? 'fa-solid fa-exclamation' : 'fa-solid fa-check';
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () {
-      toast.classList.remove('show');
-    }, 4000);
+  /* ---------------- scroll progress ---------------- */
+  var bar = document.getElementById('bar');
+  var onScroll = function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? Math.min(100, Math.max(0, (window.scrollY / h) * 100)) : 0) + '%';
+    setStuck();
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------- marquee: constant px/sec ---------------- */
+  var stripTrack = document.getElementById('stripTrack');
+  if (stripTrack) {
+    var tuneStrip = function () {
+      var group = stripTrack.querySelector('.strip-group');
+      if (!group) return;
+      var w = group.getBoundingClientRect().width;
+      if (w) stripTrack.style.animationDuration = (w / 58).toFixed(2) + 's';
+    };
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(tuneStrip).catch(function () {}); }
+    window.addEventListener('load', tuneStrip);
+    window.addEventListener('resize', tuneStrip, { passive: true });
+    tuneStrip();
   }
 
-  /* ------------------------------- FORM --------------------------------- */
-  var form = document.getElementById('bookingForm');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var required = form.querySelectorAll('[required]');
-    var valid = true;
-    var firstInvalid = null;
-
-    required.forEach(function (field) {
-      if (!field.value.trim()) {
-        field.style.borderColor = 'var(--coral)';
-        if (!firstInvalid) firstInvalid = field;
-        valid = false;
-      } else {
-        field.style.borderColor = '';
-      }
-    });
-
-    if (!valid) {
-      showToast('Please fill in all required fields.', true);
-      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    var schoolName = form.querySelector('[name="school"]').value;
-    showToast('Request received from ' + schoolName + ' — we\'ll be in touch within 48 hours.');
-    form.reset();
-  });
-
-  form.querySelectorAll('input, select, textarea').forEach(function (field) {
-    var clear = function () { field.style.borderColor = ''; };
-    field.addEventListener('input', clear);
-    field.addEventListener('change', clear);
-  });
-
-  /* ------------------------ SMOOTH ANCHOR SCROLL ------------------------ */
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (!href || href === '#' || href.length <= 1) return;
-      var target = document.querySelector(href);
+  /* ---------------- smooth anchors ---------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (!id || id.length < 2) return;
+      var target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      var offset = 90;
-      var targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      closeDrawer();
+      var top = target.getBoundingClientRect().top + window.scrollY - (masthead.offsetHeight + 14);
+      window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
     });
   });
 
-  /* -------------------------- MAGNETIC BUTTONS --------------------------
-     Proximity-based: the cursor pulls a button from up to ~70px away,
-     the label drifts slightly further, and everything springs back.
-     Driven by one document-level pointermove on a rAF, so positions stay
-     correct while scrolling and it costs nothing when the mouse is idle.
-  ----------------------------------------------------------------------- */
-  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------------- toast ---------------- */
+  var toast = document.getElementById('toast');
+  var toastText = document.getElementById('toastText');
+  var toastIcon = document.getElementById('toastIcon');
+  var toastTimer;
+  function popToast(msg, bad) {
+    toastText.textContent = msg;
+    toast.classList.toggle('bad', !!bad);
+    toastIcon.innerHTML = bad ? '<use href="#i-alert"></use>' : '<use href="#i-check"></use>';
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 4200);
+  }
 
-  if (finePointer && !reducedMotion) {
+  /* ---------------- booking form ---------------- */
+  var form = document.getElementById('bookingForm');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    form.querySelectorAll('[required]').forEach(function (f) {
+      if (!f.value.trim()) {
+        f.style.borderColor = 'var(--coral)';
+        if (!bad) bad = f;
+      } else {
+        f.style.borderColor = '';
+      }
+    });
+    var email = form.querySelector('[name="email"]');
+    if (!bad && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) {
+      email.style.borderColor = 'var(--coral)';
+      bad = email;
+      popToast('That email address looks incomplete.', true);
+      bad.focus();
+      return;
+    }
+    if (bad) {
+      popToast('Please fill in all required fields.', true);
+      bad.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
+      bad.focus({ preventScroll: true });
+      return;
+    }
+    popToast('Request received from ' + form.querySelector('[name="school"]').value + " — we'll be in touch within 48 hours.");
+    form.reset();
+  });
+  form.querySelectorAll('input, select, textarea').forEach(function (f) {
+    var clear = function () { f.style.borderColor = ''; };
+    f.addEventListener('input', clear);
+    f.addEventListener('change', clear);
+  });
+
+  /* ---------------- magnetic buttons ---------------- */
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && !reduced) {
     var magnets = [];
-    document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta, .form-submit').forEach(function (el) {
+    document.querySelectorAll('.btn, .nav-cta').forEach(function (el) {
       el.classList.add('magnetic');
       var inner = document.createElement('span');
       inner.className = 'magnetic-inner';
@@ -2320,17 +1812,9 @@ footer {
       magnets.push({ el: el, inner: inner, pulled: false });
     });
 
-    var pointerX = -9999, pointerY = -9999;
-    var queued = false;
-    var PAD_X = 70;   /* how far outside the button the field reaches */
-    var PAD_Y = 45;
-    var STRENGTH = 0.32;
-    var MAX_SHIFT = 16;
-
-    var clamp = function (v, limit) {
-      return Math.max(-limit, Math.min(limit, v));
-    };
-
+    var px = -9999, py = -9999, queued = false;
+    var PAD_X = 70, PAD_Y = 45, PULL = 0.32, MAX = 16;
+    var clamp = function (v) { return Math.max(-MAX, Math.min(MAX, v)); };
     var release = function (m) {
       if (!m.pulled) return;
       m.pulled = false;
@@ -2338,71 +1822,41 @@ footer {
       m.el.style.transform = '';
       m.inner.style.transform = '';
     };
-
-    var update = function () {
+    var tick = function () {
       queued = false;
-      for (var i = 0; i < magnets.length; i++) {
-        var m = magnets[i];
+      magnets.forEach(function (m) {
         var r = m.el.getBoundingClientRect();
-
-        /* offscreen or hidden (e.g. nav links on mobile) */
-        if (!r.width || r.bottom < -200 || r.top > window.innerHeight + 200) {
-          release(m);
-          continue;
-        }
-
-        var dx = pointerX - (r.left + r.width / 2);
-        var dy = pointerY - (r.top + r.height / 2);
-        var reachX = r.width / 2 + PAD_X;
-        var reachY = r.height / 2 + PAD_Y;
-        var dist = Math.sqrt((dx / reachX) * (dx / reachX) + (dy / reachY) * (dy / reachY));
-
-        if (dist <= 1) {
-          var falloff = 1 - dist * 0.45;           /* softer at the edge of the field */
-          var tx = clamp(dx * STRENGTH * falloff, MAX_SHIFT);
-          var ty = clamp(dy * STRENGTH * falloff, MAX_SHIFT);
-          if (!m.pulled) {
-            m.pulled = true;
-            m.el.classList.add('is-pulled');
-          }
-          m.el.style.transform = 'translate3d(' + tx.toFixed(2) + 'px, ' + (ty - 2).toFixed(2) + 'px, 0)';
-          m.inner.style.transform = 'translate3d(' + (tx * 0.32).toFixed(2) + 'px, ' + (ty * 0.32).toFixed(2) + 'px, 0)';
+        if (!r.width || r.bottom < -200 || r.top > window.innerHeight + 200) { release(m); return; }
+        var dx = px - (r.left + r.width / 2);
+        var dy = py - (r.top + r.height / 2);
+        var rx = r.width / 2 + PAD_X;
+        var ry = r.height / 2 + PAD_Y;
+        var d = Math.sqrt((dx / rx) * (dx / rx) + (dy / ry) * (dy / ry));
+        if (d <= 1) {
+          var fall = 1 - d * 0.45;
+          var tx = clamp(dx * PULL * fall);
+          var ty = clamp(dy * PULL * fall);
+          if (!m.pulled) { m.pulled = true; m.el.classList.add('is-pulled'); }
+          m.el.style.transform = 'translate3d(' + tx.toFixed(2) + 'px,' + (ty - 2).toFixed(2) + 'px,0)';
+          m.inner.style.transform = 'translate3d(' + (tx * 0.32).toFixed(2) + 'px,' + (ty * 0.32).toFixed(2) + 'px,0)';
         } else {
           release(m);
         }
-      }
+      });
     };
-
-    var queueUpdate = function () {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(update);
-    };
-
+    var queue = function () { if (!queued) { queued = true; requestAnimationFrame(tick); } };
     document.addEventListener('pointermove', function (e) {
       if (e.pointerType && e.pointerType !== 'mouse') return;
-      pointerX = e.clientX;
-      pointerY = e.clientY;
-      queueUpdate();
+      px = e.clientX; py = e.clientY;
+      queue();
     }, { passive: true });
-
-    /* keep the field aligned while the page moves under the cursor */
-    window.addEventListener('scroll', queueUpdate, { passive: true });
-    window.addEventListener('resize', queueUpdate, { passive: true });
-
-    document.addEventListener('pointerleave', function () {
-      pointerX = -9999;
-      pointerY = -9999;
-      queueUpdate();
-    });
-    window.addEventListener('blur', function () {
-      pointerX = -9999;
-      pointerY = -9999;
-      queueUpdate();
-    });
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue, { passive: true });
+    document.addEventListener('pointerleave', function () { px = -9999; py = -9999; queue(); });
+    window.addEventListener('blur', function () { px = -9999; py = -9999; queue(); });
   }
 })();
 </script>
 
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d1cc204ba553a7',t:'MTc4NzA2NTMyMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d1ec4fbfede0b7',t:'MTc4NzA2NjY0MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
