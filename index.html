@@ -605,11 +605,15 @@ a { color: inherit; }
 .strip-track {
   display: flex;
   width: max-content;
-  animation: slide 34s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
-.strip:hover .strip-track { animation-play-state: paused; }
-.strip-group { display: flex; align-items: center; list-style: none; flex: 0 0 auto; }
+.strip-group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  flex: 0 0 auto;
+}
 .strip-group li {
   display: inline-flex;
   align-items: center;
@@ -627,10 +631,7 @@ a { color: inherit; }
   width: 7px; height: 7px;
   background: var(--teal-deep);
   transform: rotate(45deg);
-}
-@keyframes slide {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -1124,7 +1125,9 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  *:not(.strip-track):not(.dot)::before,
+  *:not(.strip-track):not(.dot)::after,
+  *:not(.strip-track):not(.dot) {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -1184,8 +1187,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   <symbol id="i-noone" viewBox="0 0 24 24"><path d="M15.3 8.6a3.4 3.4 0 0 1-4.8 3.1M8.8 5.6a3.4 3.4 0 0 1 4.6 1.2"/><path d="M4.6 20a7.4 7.4 0 0 1 10.6-6"/><path d="m3.6 3.6 16.8 16.8"/></symbol>
   <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4.6 3.6 6.9v12.6L9 17.2l6 2.3 5.4-2.3V4.6L15 6.9 9 4.6Z"/><path d="M9 4.6v12.6M15 6.9v12.6"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2"/><path d="m4 6.6 8 5.8 8-5.8"/></symbol>
-  <symbol id="i-car" viewBox="0 0 24 24"><path d="M4.4 16.4h15.2M6 16.4v-4.6l1.7-3.9a2 2 0 0 1 1.8-1.2h5a2 2 0 0 1 1.8 1.2l1.7 3.9v4.6"/><path d="M6 11.8h12"/><circle cx="8.2" cy="18.2" r="1.6"/><circle cx="15.8" cy="18.2" r="1.6"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.8 12.4 4.8 4.8L19.4 6.6"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M4.4 16.4h15.2M6 16.4v-4.6l1.7-3.9a2 2 0 0 1 1.8-1.2h5a2 2 0 0 1 1.8 1.2l1.7 3.9v4.6"/><path d="M6 11.8h12"/><circle cx="8.2" cy="18.2" r="1.6"/><circle cx="15.8" cy="18.2" r="14 6.6"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 5.6v8.2M12 18.2h.01"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17" cy="7" r="1.05" fill="currentColor" stroke="none"/></symbol>
   <symbol id="i-li" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="4"/><path d="M7.6 10.4v6.6"/><circle cx="7.6" cy="7.4" r="1.1" fill="currentColor" stroke="none"/><path d="M11.8 17v-6.6M11.8 13.6a2.6 2.6 0 0 1 5.2 0V17"/></symbol>
@@ -1550,7 +1552,7 @@ We're making it readable.</h2>
             <span class="bx"><svg class="ico"><use href="#i-mail"></use></svg></span>
             <div class="txt">
               <span class="k">Email us</span>
-              <a class="v" href="mailto:hello@clinically.org">hello@clinically.org</a>
+              <a class="v" href="/cdn-cgi/l/email-protection#f29a979e9e9db2919e9b9c9b91939e9e8bdc9d8095"><span class="__cf_email__" data-cfemail="e088858c8c8fa0838c898e8983818c8c99ce8f9287">[email&#160;protected]</span></a>
             </div>
           </div>
           <div class="meta-row">
@@ -1685,7 +1687,7 @@ We're making it readable.</h2>
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="mailto:hello@clinically.org">hello@clinically.org</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#ec8489808083ac8f808582858f8d808095c2839e8b"><span class="__cf_email__" data-cfemail="4129242d2d2e01222d282f2822202d2d386f2e3326">[email&#160;protected]</span></a></li>
           <li><a href="#area">Service area</a></li>
           <li><a href="#contact">Partner with us</a></li>
           <li><a href="#contact">Volunteer</a></li>
@@ -1705,7 +1707,7 @@ We're making it readable.</h2>
   <span id="toastText">Request received — we'll be in touch within 48 hours.</span>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
   'use strict';
 
@@ -1761,19 +1763,75 @@ We're making it readable.</h2>
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ---------------- marquee: constant px/sec ---------------- */
+  /* ---------------- marquee: seamless rAF scroll ---------------- */
+  var strip = document.querySelector('.strip');
   var stripTrack = document.getElementById('stripTrack');
-  if (stripTrack) {
-    var tuneStrip = function () {
-      var group = stripTrack.querySelector('.strip-group');
-      if (!group) return;
-      var w = group.getBoundingClientRect().width;
-      if (w) stripTrack.style.animationDuration = (w / 58).toFixed(2) + 's';
+  if (strip && stripTrack) {
+    var WORDS = ['MCAT', 'Shadowing', 'Clinical Hours', 'Research', 'Premed', 'Medical School', 'Residency', 'Volunteering', 'Metro Detroit'];
+    var SPEED = 72;
+    var offset = 0;
+    var lastTs = 0;
+    var paused = false;
+    var loopAt = 0;
+
+    var makeGroup = function () {
+      var ul = document.createElement('ul');
+      ul.className = 'strip-group';
+      WORDS.forEach(function (word) {
+        var li = document.createElement('li');
+        li.textContent = word;
+        ul.appendChild(li);
+      });
+      return ul;
     };
-    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(tuneStrip).catch(function () {}); }
-    window.addEventListener('load', tuneStrip);
-    window.addEventListener('resize', tuneStrip, { passive: true });
-    tuneStrip();
+
+    var rebuild = function () {
+      stripTrack.innerHTML = '';
+      var group = makeGroup();
+      stripTrack.appendChild(group);
+      var guard = 0;
+      while (group.getBoundingClientRect().width < strip.clientWidth + 80 && guard < 16) {
+        WORDS.forEach(function (word) {
+          var li = document.createElement('li');
+          li.textContent = word;
+          group.appendChild(li);
+        });
+        guard++;
+      }
+      stripTrack.appendChild(group.cloneNode(true));
+      loopAt = group.getBoundingClientRect().width;
+      if (offset <= -loopAt) offset = 0;
+      stripTrack.style.transform = 'translate3d(' + offset + 'px,0,0)';
+    };
+
+    rebuild();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(rebuild).catch(function () {});
+    }
+    window.addEventListener('load', rebuild);
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(rebuild, 120);
+    }, { passive: true });
+
+    strip.addEventListener('mouseenter', function () { paused = true; });
+    strip.addEventListener('mouseleave', function () { paused = false; });
+    strip.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+    strip.addEventListener('touchend', function () { paused = false; });
+
+    var step = function (now) {
+      if (!lastTs) lastTs = now;
+      var dt = Math.min(0.05, (now - lastTs) / 1000);
+      lastTs = now;
+      if (!paused && loopAt > 0) {
+        offset -= SPEED * dt;
+        if (offset <= -loopAt) offset += loopAt;
+        stripTrack.style.transform = 'translate3d(' + offset.toFixed(2) + 'px,0,0)';
+      }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   /* ---------------- smooth anchors ---------------- */
@@ -1898,5 +1956,5 @@ We're making it readable.</h2>
   }
 })();
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d236d27f07cbf7',t:'MTc4NzA2OTY5Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
