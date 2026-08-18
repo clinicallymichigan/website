@@ -272,7 +272,7 @@ a { color: inherit; }
     radial-gradient(55% 70% at 8% 92%, rgba(205, 255, 216, 0.18), transparent 60%),
     linear-gradient(158deg, #0a2622 0%, #123531 48%, #1f4d49 100%);
   color: var(--cream);
-  padding: clamp(8.5rem, 15vh, 12rem) 0 clamp(3rem, 6vw, 5rem);
+  padding: clamp(7.5rem, 11.5vh, 9.5rem) 0 clamp(2.75rem, 4.5vw, 4rem);
   overflow: hidden;
 }
 .hero::before {
@@ -301,49 +301,6 @@ a { color: inherit; }
   50% { transform: translateY(-18px) rotate(12deg); }
 }
 .hero .shell { position: relative; z-index: 2; }
-
-/* logo lockup — the loudest thing on the page */
-.lockup {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
-  flex-wrap: wrap;
-  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
-  margin-bottom: clamp(1.75rem, 3.5vw, 3rem);
-  border-bottom: 1.5px solid var(--line-dark);
-}
-.lockup-logo {
-  position: relative;
-  width: clamp(280px, 46vw, 620px);
-}
-.lockup-logo img {
-  width: 100%;
-  height: auto;
-  filter: brightness(0) invert(1);
-}
-.lockup-logo::after {
-  content: '';
-  position: absolute;
-  left: -6%;
-  right: 22%;
-  bottom: -14px;
-  height: 10px;
-  background: var(--mint);
-  opacity: 0.9;
-  border-radius: 2px;
-}
-.lockup-note {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(244, 251, 245, 0.62);
-  text-align: right;
-  line-height: 1.9;
-  padding-bottom: 6px;
-}
-.lockup-note b { color: var(--mint); display: block; font-weight: 800; }
 
 .tag {
   display: inline-flex;
@@ -382,8 +339,8 @@ a { color: inherit; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
+  align-items: center;
   gap: clamp(2rem, 4.5vw, 4.5rem);
-  align-items: start;
 }
 .hero h1 { margin-bottom: 22px; color: var(--cream); }
 .hero h1 em { color: var(--mint); }
@@ -983,7 +940,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
 
 .foot-mark {
   border-top: 1.5px solid var(--line-dark);
-  padding: 26px 0 34px;
+  padding: 26px 0 clamp(2rem, 3.5vw, 3rem);
   display: flex;
   justify-content: space-between;
   gap: 14px;
@@ -991,17 +948,6 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   font-size: 12.5px;
   color: rgba(244, 251, 245, 0.45);
 }
-.watermark {
-  padding-bottom: 10px;
-  pointer-events: none;
-  user-select: none;
-}
-.watermark img {
-  width: 100%;
-  filter: brightness(0) invert(1);
-  opacity: 0.07;
-}
-
 /* TOAST */
 .toast {
   position: fixed;
@@ -1097,12 +1043,13 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   .foot-brand { grid-column: 1 / -1; }
 }
 
+@media (max-width: 1080px) {
+  .hero-grid { align-items: start; }
+}
+
 @media (max-width: 720px) {
-  .hero { padding-top: clamp(6.5rem, 18vh, 8rem); }
+  .hero { padding-top: clamp(5.5rem, 13vh, 7rem); }
   .hero-plus { display: none; }
-  .lockup { flex-direction: column; align-items: flex-start; gap: 18px; }
-  .lockup-logo { width: min(100%, 420px); }
-  .lockup-note { text-align: left; }
   .actions { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
   .pair { grid-template-columns: 1fr; }
@@ -1190,22 +1137,12 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
 
 <!-- ===================== HERO ===================== -->
 <section class="hero on-dark" id="top">
-  <span class="hero-plus" style="top:18%; right:9%; font-size:52px;">+</span>
-  <span class="hero-plus" style="top:62%; right:4%; font-size:30px; animation-delay:1.2s;">+</span>
-  <span class="hero-plus" style="bottom:12%; left:6%; font-size:38px; animation-delay:2.4s;">+</span>
-  <span class="hero-plus" style="top:34%; left:2%; font-size:22px; animation-delay:3.1s;">+</span>
+  <span class="hero-plus" style="top:22%; left:50.5%; font-size:44px;">+</span>
+  <span class="hero-plus" style="top:68%; left:51.5%; font-size:26px; animation-delay:1.4s;">+</span>
+  <span class="hero-plus" style="bottom:5%; left:2%; font-size:30px; animation-delay:2.4s;">+</span>
+  <span class="hero-plus" style="top:14%; left:1.5%; font-size:20px; animation-delay:3.1s;">+</span>
 
   <div class="shell">
-
-    <div class="lockup">
-      <div class="lockup-logo">
-        <img src="logo.svg" alt="Clinically">
-      </div>
-      <div class="lockup-note">
-        Youth-led · Nonprofit<br>
-        <b>Metro Detroit, Michigan</b>
-      </div>
-    </div>
 
     <div class="hero-grid">
       <div>
@@ -1505,7 +1442,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
             <span class="bx"><svg class="ico"><use href="#i-mail"></use></svg></span>
             <div class="txt">
               <span class="k">Email us</span>
-              <a class="v" href="/cdn-cgi/l/email-protection#4526292c2b2c262429293c282c262d2c22242b052228242c296b262a28"><span class="__cf_email__" data-cfemail="6407080d0a0d070508081d090d070c0d03050a240309050d084a070b09">[email&#160;protected]</span></a>
+              <a class="v" href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a>
             </div>
           </div>
           <div class="meta-row">
@@ -1640,7 +1577,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#a0c3ccc9cec9c3c1ccccd9cdc9c3c8c9c7c1cee0c7cdc1c9cc8ec3cfcd"><span class="__cf_email__" data-cfemail="ef8c838681868c8e83839682868c8786888e81af88828e8683c18c8082">[email&#160;protected]</span></a></li>
+          <li><a href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a></li>
           <li><a href="#area">Service area</a></li>
           <li><a href="#contact">Partner with us</a></li>
           <li><a href="#contact">Volunteer</a></li>
@@ -1652,10 +1589,6 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
       <span>Clinically — a nonprofit educational initiative serving Metro Detroit, Michigan.</span>
       <span>Made with care for the next generation of doctors.</span>
     </div>
-
-    <div class="watermark" aria-hidden="true">
-      <img src="logo.svg" alt="">
-    </div>
   </div>
 </footer>
 
@@ -1664,7 +1597,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   <span id="toastText">Request received — we'll be in touch within 48 hours.</span>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function () {
   'use strict';
 
@@ -1858,5 +1791,5 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
 })();
 </script>
 
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d1ec4fbfede0b7',t:'MTc4NzA2NjY0MQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
