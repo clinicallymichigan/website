@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clinically — Bringing Premed Education to the Classroom</title>
+<title>Clinically — Bringing Premed Education to Metro Detroit Classrooms</title>
+<meta name="description" content="Clinically is a youth-led initiative delivering free, in-person premed education to high schools across Metro Detroit and Southeast Michigan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -30,7 +31,7 @@
   --radius: 18px;
   --radius-lg: 28px;
   --gradient: linear-gradient(90deg, #cdffd8, #539d96);
-  
+
   /* Fluid spacing variables */
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
   --space-sm: clamp(0.75rem, 1.5vw, 1rem);
@@ -63,7 +64,7 @@ body {
 }
 
 .container {
-  max-width: 1400px; 
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 3vw, 2.5rem);
 }
@@ -93,7 +94,7 @@ body {
 /* NAV */
 nav {
   position: fixed;
-  top: clamp(0.75rem, 1.5vw, 1.25rem); 
+  top: clamp(0.75rem, 1.5vw, 1.25rem);
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
@@ -166,6 +167,7 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 .nav-cta:hover {
   background: var(--teal-deep);
@@ -179,7 +181,7 @@ nav {
   min-height: 100vh;
   background: linear-gradient(90deg, #cdffd8, #539d96);
   overflow: hidden;
-  padding: clamp(6rem, 12vh, 9rem) 0 clamp(4rem, 6vh, 5rem);
+  padding: clamp(6rem, 12vh, 9rem) 0 clamp(5rem, 8vh, 6.5rem);
   display: flex;
   align-items: center;
 }
@@ -265,6 +267,7 @@ nav {
   background: var(--coral);
   border-radius: 50%;
   position: relative;
+  flex-shrink: 0;
 }
 .hero-tag .pulse::before {
   content: '';
@@ -383,6 +386,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px dashed var(--line);
@@ -404,6 +408,7 @@ nav {
   background: var(--mint);
   padding: 4px 10px;
   border-radius: 100px;
+  white-space: nowrap;
 }
 
 /* SESSION SNAPSHOT */
@@ -504,7 +509,9 @@ nav {
 }
 .roadmap-step.current .num { color: var(--coral); }
 
-/* MARQUEE */
+/* ============================================================
+   MARQUEE  (rebuilt: two identical tracks, seamless loop)
+   ============================================================ */
 .marquee {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -512,32 +519,49 @@ nav {
   color: var(--mint);
   padding: 14px 0;
   overflow: hidden;
-  white-space: nowrap;
   z-index: 3;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 .marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee 32s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+.marquee-group li {
   display: inline-flex;
+  align-items: center;
   gap: 40px;
-  animation: marquee 35s linear infinite;
+  padding-right: 40px;
   font-weight: 700;
   font-style: italic;
   font-size: 14px;
   letter-spacing: 0.05em;
+  white-space: nowrap;
 }
-.marquee-track span {
-  display: inline-flex;
-  align-items: center;
-  gap: 40px;
-}
-.marquee-track span::after {
+.marquee-group li::after {
   content: '✕';
   color: var(--coral);
   font-style: normal;
   font-weight: 900;
 }
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
 
 /* SECTION DEFAULTS */
@@ -595,7 +619,6 @@ section { position: relative; }
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
 }
 .program-card::before {
   content: '';
@@ -775,82 +798,6 @@ section { position: relative; }
   margin-top: 4px;
 }
 
-/* TOPICS */
-.topics {
-  padding: var(--space-2xl) 0;
-  background: var(--cream);
-}
-.topics-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 1.5vw, 1.25rem);
-}
-
-.topic-card {
-  background: var(--paper);
-  border-radius: var(--radius);
-  padding: clamp(1.5rem, 2vw, 2rem) clamp(1.25rem, 1.5vw, 1.625rem);
-  border: 1px solid var(--line);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-}
-.topic-card:hover {
-  background: var(--ink);
-  color: var(--cream);
-  transform: translateY(-6px);
-  box-shadow: var(--shadow);
-}
-.topic-card .num {
-  font-size: 13px;
-  font-weight: 700;
-  font-style: italic;
-  color: var(--teal);
-  margin-bottom: 24px;
-  letter-spacing: 0.05em;
-}
-.topic-card:hover .num { color: var(--mint); }
-.topic-card h3 {
-  font-size: 20px;
-  font-weight: 700;
-  font-style: italic;
-  margin-bottom: 14px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-.topic-card p {
-  font-size: 13.5px;
-  color: var(--ink-2);
-  line-height: 1.6;
-  margin-bottom: 20px;
-  flex: 1;
-}
-.topic-card:hover p { color: rgba(247, 255, 249, 0.8); }
-.topic-card .duration {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--teal-deep);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.topic-card:hover .duration { color: var(--mint); }
-
-.topic-card.custom {
-  background: var(--ink);
-  color: var(--cream);
-  border-color: var(--ink);
-}
-.topic-card.custom .num { color: var(--mint); }
-.topic-card.custom h3 { color: var(--mint); }
-.topic-card.custom p { color: rgba(247, 255, 249, 0.8); }
-.topic-card.custom .duration { color: var(--mint); }
-
 /* PROCESS */
 .process {
   padding: var(--space-2xl) 0;
@@ -934,10 +881,66 @@ section { position: relative; }
   line-height: 1.6;
 }
 
+/* SERVICE AREA */
+.area {
+  padding: var(--space-2xl) 0;
+  background: var(--paper);
+}
+.area-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.75rem);
+  align-items: center;
+}
+.area-map {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: var(--shadow-sm);
+}
+.area-map h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+}
+.area-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.area-chips span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: all 0.25s;
+}
+.area-chips span:hover {
+  background: var(--ink);
+  color: var(--mint);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.area-note {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
 /* TESTIMONIALS */
 .testimonials {
   padding: var(--space-2xl) 0;
-  background: var(--paper);
+  background: var(--cream);
 }
 .testimonials-grid {
   display: grid;
@@ -947,7 +950,7 @@ section { position: relative; }
 
 .testimonial {
   padding: 36px;
-  background: var(--cream);
+  background: var(--paper);
   border-radius: var(--radius-lg);
   position: relative;
   border: 1px solid var(--line);
@@ -956,7 +959,6 @@ section { position: relative; }
 .testimonial:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
-  background: var(--paper);
 }
 .testimonial .stars {
   color: var(--gold);
@@ -988,6 +990,7 @@ section { position: relative; }
   font-style: italic;
   color: var(--ink);
   font-size: 16px;
+  flex-shrink: 0;
 }
 .testimonial .author .name {
   font-weight: 700;
@@ -1074,7 +1077,11 @@ section { position: relative; }
   font-size: 15px;
   font-weight: 600;
   color: var(--ink);
+  text-decoration: none;
+  word-break: break-word;
+  transition: color 0.2s;
 }
+a.contact-value:hover { color: var(--teal-deep); text-decoration: underline; }
 
 .contact-form {
   background: var(--paper);
@@ -1199,7 +1206,7 @@ footer {
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 40px;
   margin-bottom: 60px;
 }
@@ -1276,6 +1283,40 @@ footer {
   gap: 16px;
 }
 
+/* ============================================================
+   MAGNETIC BUTTONS
+   Own transition for `transform` so the pull tracks the cursor
+   instead of lagging behind the generic `transition: all .3s`.
+   ============================================================ */
+.magnetic {
+  will-change: transform;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.magnetic.is-pulled {
+  transition:
+    transform 0.14s cubic-bezier(0.33, 1, 0.68, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.magnetic-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.magnetic.is-pulled .magnetic-inner {
+  transition: transform 0.14s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
 /* TOAST */
 .toast {
   position: fixed;
@@ -1325,7 +1366,7 @@ footer {
 /* LAPTOP / SMALL DESKTOP FIT */
 @media (max-width: 1280px) and (max-height: 850px) {
   .hero {
-    padding: clamp(5rem, 10vh, 7rem) 0 clamp(3.5rem, 5vh, 4.5rem);
+    padding: clamp(5rem, 10vh, 7rem) 0 clamp(4rem, 6vh, 5rem);
   }
   .hero h1 {
     font-size: clamp(2.25rem, 4.5vw, 3.75rem);
@@ -1377,44 +1418,50 @@ footer {
 /* TABLET (under 968px) */
 @media (max-width: 968px) {
   .nav-links { display: none; }
-  
+
   .hero-content {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .hero {
-    padding: 120px 0 60px;
+    padding: 120px 0 80px;
     min-height: auto;
   }
-  
+
   .why-grid {
     grid-template-columns: 1fr;
     gap: 40px;
     margin-top: 40px;
   }
-  
-  .topics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
+
   .process-steps {
     grid-template-columns: repeat(2, 1fr);
   }
   .process-steps::before { display: none; }
-  
+
+  .area-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
   .testimonials-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .contact-meta {
     margin-top: 30px;
   }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-brand { grid-column: 1 / -1; }
 }
 
 /* MOBILE (under 600px) */
@@ -1422,11 +1469,11 @@ footer {
   section {
     padding: 60px 0 !important;
   }
-  
+
   .container {
     padding: 0 20px;
   }
-  
+
   nav {
     top: 8px;
     width: calc(100% - 16px);
@@ -1442,143 +1489,141 @@ footer {
     padding: 8px 14px;
     font-size: 12px;
   }
-  
+
   .hero {
-    padding: 100px 0 50px;
+    padding: 100px 0 70px !important;
   }
-  
+
   .hero-tag {
     font-size: 11px;
     padding: 6px 12px;
   }
-  
+
   .hero h1 {
     font-size: clamp(2rem, 8vw, 2.5rem);
   }
-  
+
   .hero-sub {
     font-size: 0.95rem;
   }
-  
+
   .hero-ctas {
     flex-direction: column;
     width: 100%;
     gap: 12px;
     margin-bottom: 30px;
   }
-  
+
   .btn {
     width: 100%;
     justify-content: center;
     padding: 14px 20px;
   }
-  
+
   .hero-trust {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
     font-size: 12px;
   }
-  
+
   .hero-card {
     padding: 1.25rem;
   }
-  
+
   .hero-card-top {
     margin-bottom: 16px;
     padding-bottom: 14px;
   }
-  
+
   .session-snapshot {
     padding: 1rem;
     margin-bottom: 16px;
   }
-  
+
   .snapshot-item {
     gap: 10px;
     margin-bottom: 12px;
   }
-  
+
   .snapshot-item .icon-box {
     width: 32px;
     height: 32px;
     font-size: 12px;
   }
-  
+
   .snapshot-item .text span {
     font-size: 13px;
   }
-  
+
   .snapshot-item .text p {
     font-size: 12px;
   }
-  
+
   .roadmap-step {
     padding: 10px 12px;
     font-size: 12px;
   }
-  
+
   .programs-grid,
-  .topics-grid,
   .process-steps,
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .program-card,
-  .topic-card,
   .testimonial {
     padding: 24px;
   }
-  
+
   .why-point {
     padding: 20px;
     flex-direction: column;
     gap: 12px;
   }
-  
+
   .why-quote {
     padding: 28px;
   }
-  
+
   .why-quote blockquote {
     font-size: 18px;
   }
-  
+
   .step-num {
     width: 60px;
     height: 60px;
     font-size: 22px;
   }
-  
+
   .contact-form {
     padding: 24px;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 30px;
     margin-bottom: 40px;
   }
-  
+
   .footer-brand {
     text-align: left;
   }
-  
+
   .footer-brand p {
     max-width: 100%;
   }
-  
+
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 8px;
   }
-  
+
   .toast {
     bottom: 16px;
     padding: 12px 20px;
@@ -1598,8 +1643,8 @@ footer {
   <ul class="nav-links">
     <li><a href="#what">What We Do</a></li>
     <li><a href="#why">Why It Matters</a></li>
-    <li><a href="#topics">Topics</a></li>
     <li><a href="#process">Process</a></li>
+    <li><a href="#area">Where We Go</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">
@@ -1612,32 +1657,32 @@ footer {
 <section class="hero">
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
-  
+
   <span class="plus-sign" style="top: 15%; left: 8%; font-size: 48px; animation-delay: 0s;">+</span>
   <span class="plus-sign" style="top: 25%; right: 12%; font-size: 32px; animation-delay: 1s;">+</span>
   <span class="plus-sign" style="bottom: 30%; left: 15%; font-size: 24px; animation-delay: 2s;">+</span>
   <span class="plus-sign" style="top: 60%; right: 8%; font-size: 40px; animation-delay: 1.5s;">+</span>
   <span class="plus-sign" style="bottom: 22%; right: 30%; font-size: 28px; animation-delay: 3s;">+</span>
-  
+
   <div class="container">
     <div class="hero-content">
       <div class="hero-left" data-aos="fade-right">
         <div class="hero-tag">
           <span class="pulse"></span>
-          Now booking for the Spring 2025 semester
+          Now booking Metro Detroit schools for 2026–2027
         </div>
         <h1>
           We bring the road to medicine <span class="gradient">into your classroom.</span>
         </h1>
         <p class="hero-sub">
-          Clinically is a youth-led initiative delivering premed education directly to schools — turning curiosity about medicine into a clear, actionable path forward for the next generation of doctors.
+          Clinically is a youth-led initiative delivering premed education directly to high schools across Metro Detroit — turning curiosity about medicine into a clear, actionable path forward for the next generation of doctors.
         </p>
         <div class="hero-ctas">
           <a href="#contact" class="btn btn-primary">
             Bring Clinically to Your School
             <i class="fa-solid fa-arrow-right"></i>
           </a>
-          <a href="#topics" class="btn btn-ghost">
+          <a href="#what" class="btn btn-ghost">
             See What We Cover
           </a>
         </div>
@@ -1647,8 +1692,8 @@ footer {
             Free for schools
           </div>
           <div class="hero-mini-info">
-            <i class="fa-solid fa-clock"></i>
-            45–60 min sessions
+            <i class="fa-solid fa-location-dot"></i>
+            In person, Metro Detroit
           </div>
           <div class="hero-mini-info">
             <i class="fa-solid fa-graduation-cap"></i>
@@ -1656,7 +1701,7 @@ footer {
           </div>
         </div>
       </div>
-      
+
       <div class="hero-right" data-aos="fade-left" data-aos-delay="200">
         <div class="hero-card">
           <div class="hero-card-top">
@@ -1665,13 +1710,13 @@ footer {
               <i class="fa-regular fa-clock"></i> 45–60 mins
             </div>
           </div>
-          
+
           <div class="session-snapshot">
             <div class="snapshot-title">What's included</div>
             <div class="snapshot-item">
               <div class="icon-box"><i class="fa-solid fa-comments"></i></div>
               <div class="text">
-                <span>Interactive Q&A</span>
+                <span>Interactive Q&amp;A</span>
                 <p>Students ask real questions and get honest answers from current premeds.</p>
               </div>
             </div>
@@ -1683,14 +1728,14 @@ footer {
               </div>
             </div>
             <div class="snapshot-item">
-              <div class="icon-box"><i class="fa-solid fa-hand-holding-heart"></i></div>
+              <div class="icon-box"><i class="fa-solid fa-list-check"></i></div>
               <div class="text">
-                <span>Mentorship Access</span>
-                <p>Eligible students are invited to join our 1-on-1 mentorship program.</p>
+                <span>Course Access</span>
+                <p>Interested students get access to our curated college and admissions course tracks.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="roadmap">
             <div class="roadmap-step done">
               <span class="num">01</span>
@@ -1709,7 +1754,7 @@ footer {
             </div>
             <div class="roadmap-step">
               <span class="num">04</span>
-              <span class="title">Residency & Beyond</span>
+              <span class="title">Residency &amp; Beyond</span>
               <span class="meta">Future</span>
             </div>
           </div>
@@ -1717,11 +1762,16 @@ footer {
       </div>
     </div>
   </div>
-  
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>MCAT</span><span>Shadowing</span><span>Clinical Hours</span><span>Research</span><span>Premed</span><span>Medical School</span><span>Residency</span><span>Volunteering</span>
-      <span>MCAT</span><span>Shadowing</span><span>Clinical Hours</span><span>Research</span><span>Premed</span><span>Medical School</span><span>Residency</span><span>Volunteering</span>
+
+  <!-- MARQUEE: two identical groups, animates exactly -50% for a seamless loop -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <ul class="marquee-group">
+        <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
+      </ul>
+      <ul class="marquee-group">
+        <li>MCAT</li><li>Shadowing</li><li>Clinical Hours</li><li>Research</li><li>Premed</li><li>Medical School</li><li>Residency</li><li>Volunteering</li><li>Metro Detroit</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1732,51 +1782,51 @@ footer {
     <div class="section-head" data-aos="fade-up">
       <span class="section-tag">What we do</span>
       <h2 class="section-title">Programs built for <em>curious classrooms.</em></h2>
-      <p class="section-sub">We design every Clinically session to fit into a single class period — 45 to 60 minutes of focused, honest, and interactive conversation about what it really takes to enter medicine.</p>
+      <p class="section-sub">We design every Clinically session to fit into a single class period — 45 to 60 minutes of focused, honest, and interactive conversation about what it really takes to enter medicine. Every program happens in person, in Michigan schools.</p>
     </div>
-    
+
     <div class="programs-grid">
       <div class="program-card" data-aos="fade-up">
         <div class="program-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
         <h3>In-School Presentations</h3>
-        <p>Our flagship program. A trained Clinically presenter visits your school and delivers a tailored, interactive talk that demystifies the premed pathway — from high school course selection to med school applications.</p>
+        <p>Our flagship program. A trained Clinically presenter comes to your school and delivers a tailored, interactive talk that demystifies the premed pathway — from high school course selection to med school applications.</p>
         <ul>
           <li>45–60 min</li>
           <li>Grades 9–12</li>
           <li>Free for schools</li>
         </ul>
       </div>
-      
+
       <div class="program-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="program-icon"><i class="fa-solid fa-user-group"></i></div>
-        <h3>Mentorship Match</h3>
-        <p>After a presentation, interested students are paired with current premed undergraduates for ongoing 1-on-1 mentorship — answering questions, reviewing plans, and providing real talk throughout the year.</p>
+        <div class="program-icon"><i class="fa-solid fa-list-check"></i></div>
+        <h3>Curated Course Tracks</h3>
+        <p>We build short, focused courses for students aiming at colleges and universities with strong medical pathways — which high school classes actually matter, how premed, nursing, and BS/MD programs differ, what each application really asks for, and how to build a profile that gets in.</p>
         <ul>
-          <li>1-on-1</li>
-          <li>Monthly check-ins</li>
-          <li>Virtual</li>
+          <li>Admissions-focused</li>
+          <li>College &amp; program lists</li>
+          <li>Built by current premeds</li>
         </ul>
       </div>
-      
+
       <div class="program-card" data-aos="fade-up" data-aos-delay="200">
         <div class="program-icon"><i class="fa-solid fa-book-open"></i></div>
         <h3>Resource Library</h3>
-        <p>A growing, free library of guides, timelines, and printable planning tools — covering everything from high school course selection to summer programs, shadowing etiquette, and MCAT prep timelines.</p>
+        <p>A growing, free library of guides, timelines, and printable planning tools — covering everything from high school course selection to Michigan summer programs, shadowing etiquette, and MCAT prep timelines.</p>
         <ul>
           <li>Always free</li>
-          <li>PDF + web</li>
+          <li>Printed + PDF</li>
           <li>Updated yearly</li>
         </ul>
       </div>
-      
+
       <div class="program-card" data-aos="fade-up" data-aos-delay="300">
         <div class="program-icon"><i class="fa-solid fa-microphone"></i></div>
         <h3>Med Student Panels</h3>
-        <p>Periodic virtual panels featuring current medical students from a range of schools and specialties. Students submit questions in advance and hear honest, lived-experience answers from people who just walked the path.</p>
+        <p>On-site panels featuring current medical students from Michigan schools and a range of specialties. Students submit questions in advance and hear honest, lived-experience answers from people who just walked the path.</p>
         <ul>
-          <li>Quarterly</li>
-          <li>Virtual</li>
-          <li>Q&A format</li>
+          <li>In person</li>
+          <li>By request</li>
+          <li>Q&amp;A format</li>
         </ul>
       </div>
     </div>
@@ -1791,7 +1841,7 @@ footer {
       <h2 class="section-title">The premed path is <em>opaque.</em> We're making it readable.</h2>
       <p class="section-sub">Most high school students interested in medicine have no access to premed advising. The result? Talented students — especially those from underrepresented backgrounds — walk away from the path before they even start.</p>
     </div>
-    
+
     <div class="why-grid">
       <div class="why-points">
         <div class="why-point" data-aos="fade-right">
@@ -1816,7 +1866,7 @@ footer {
           </div>
         </div>
       </div>
-      
+
       <div class="why-quote" data-aos="fade-left">
         <div class="quote-mark">"</div>
         <blockquote>
@@ -1824,70 +1874,8 @@ footer {
         </blockquote>
         <cite>
           Maya R.
-          <span>Pilot program student · now premed undergrad</span>
+          <span>Pilot program student · Metro Detroit · now premed undergrad</span>
         </cite>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TOPICS -->
-<section class="topics" id="topics">
-  <div class="container">
-    <div class="section-head" data-aos="fade-up">
-      <span class="section-tag">Presentation topics</span>
-      <h2 class="section-title">Seven sessions. <em>One roadmap.</em></h2>
-      <p class="section-sub">Schools can book a single session, mix and match, or host the full series across a semester. Every talk is interactive, jargon-free, and built for a class period.</p>
-    </div>
-    
-    <div class="topics-grid">
-      <div class="topic-card" data-aos="fade-up">
-        <div class="num">01 / Roadmap</div>
-        <h3>The Premed Pathway</h3>
-        <p>Year-by-year breakdown of what to do in high school — courses, grades, extracurriculars, and the milestones that actually matter for college premed readiness.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 45 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="50">
-        <div class="num">02 / Test</div>
-        <h3>MCAT Demystified</h3>
-        <p>What the MCAT actually is, when to start preparing, how it's scored, and how to think about it without panic. Includes a sample question walkthrough.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 50 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="num">03 / Experience</div>
-        <h3>Beyond the Books</h3>
-        <p>Clinical hours, shadowing, research, and volunteering — what each one means, how much you actually need, and how to find opportunities as a high schooler.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 45 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="num">04 / Admissions</div>
-        <h3>Inside Med School Admissions</h3>
-        <p>What admissions committees actually look at — and what they don't. A transparent look at GPA, MCAT, personal statements, interviews, and holistic review.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 60 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="num">05 / Careers</div>
-        <h3>Specialties Spotlight</h3>
-        <p>From pediatrics to pathology to surgery — a tour of medical specialties, what daily life looks like in each, and how students start exploring fit early.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 45 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="250">
-        <div class="num">06 / Reality</div>
-        <h3>The Premed Reality Check</h3>
-        <p>Finances, time commitment, burnout, and joy. An honest conversation about the cost of medical school, debt, length of training, and why people still choose it.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 60 minutes</div>
-      </div>
-      <div class="topic-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="num">07 / Stories</div>
-        <h3>Q&A with Med Students</h3>
-        <p>A rotating panel of current medical students answering submitted questions — covering doubts, mistakes, surprises, and the advice they wish they'd gotten earlier.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> 60 minutes</div>
-      </div>
-      <div class="topic-card custom" data-aos="fade-up" data-aos-delay="350">
-        <div class="num">08 / Custom</div>
-        <h3>Build Your Own</h3>
-        <p>Don't see what you need? We work with teachers and counselors to design custom sessions — career day talks, parent nights, or specialized workshops for health occupations classes.</p>
-        <div class="duration"><i class="fa-regular fa-clock"></i> Tailored</div>
       </div>
     </div>
   </div>
@@ -1901,7 +1889,7 @@ footer {
       <h2 class="section-title">Booking is <em>simple.</em> Four steps.</h2>
       <p class="section-sub">From first email to presentation day, the process takes about two weeks. We handle content, materials, and presenter coordination — you just provide the classroom.</p>
     </div>
-    
+
     <div class="process-steps">
       <div class="step" data-aos="fade-up">
         <div class="step-num">01</div>
@@ -1911,17 +1899,51 @@ footer {
       <div class="step" data-aos="fade-up" data-aos-delay="100">
         <div class="step-num">02</div>
         <h3>Tailor Together</h3>
-        <p>We schedule a 15-minute call to understand your students' needs and pick the right topics and presenter.</p>
+        <p>We schedule a 15-minute call to understand your students' needs and pick the right focus and presenter.</p>
       </div>
       <div class="step" data-aos="fade-up" data-aos-delay="200">
         <div class="step-num">03</div>
         <h3>We Present</h3>
-        <p>Our presenter arrives at your school (or joins virtually) and delivers the session — interactive, real, and on time.</p>
+        <p>Our presenter drives out to your school and delivers the session in your classroom — interactive, real, and on time.</p>
       </div>
       <div class="step" data-aos="fade-up" data-aos-delay="300">
         <div class="step-num">04</div>
         <h3>Follow-Up</h3>
-        <p>Students leave with a printed roadmap, access to our resource library, and an invitation to mentorship.</p>
+        <p>Students leave with a printed roadmap, access to our resource library, and an invite to our curated course tracks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="area" id="area">
+  <div class="container">
+    <div class="area-grid">
+      <div data-aos="fade-right">
+        <span class="section-tag">Where we go</span>
+        <h2 class="section-title">Michigan only. <em>In person, always.</em></h2>
+        <p class="section-sub">Clinically is based in Metro Detroit, and every session is delivered face-to-face in your building. We don't run virtual or online presentations — the conversations that change a student's mind happen in the room.</p>
+      </div>
+
+      <div class="area-map" data-aos="fade-left" data-aos-delay="100">
+        <h4>Counties &amp; communities we serve</h4>
+        <div class="area-chips">
+          <span>Wayne County</span>
+          <span>Oakland County</span>
+          <span>Macomb County</span>
+          <span>Washtenaw County</span>
+          <span>Detroit</span>
+          <span>Dearborn</span>
+          <span>Southfield</span>
+          <span>Warren</span>
+          <span>Novi</span>
+          <span>Wixom</span>
+          <span>Ann Arbor</span>
+          <span>Sterling Heights</span>
+        </div>
+        <p class="area-note">
+          <i class="fa-solid fa-car-side"></i>&nbsp; Outside this list but still in Michigan? Reach out anyway — if we can drive to you, we will.
+        </p>
       </div>
     </div>
   </div>
@@ -1934,7 +1956,7 @@ footer {
       <span class="section-tag">From the classroom</span>
       <h2 class="section-title">What teachers and <em>students say.</em></h2>
     </div>
-    
+
     <div class="testimonials-grid">
       <div class="testimonial" data-aos="fade-up">
         <div class="stars">★★★★★</div>
@@ -1945,11 +1967,11 @@ footer {
           <div class="avatar">DT</div>
           <div>
             <div class="name">Daniel Torres</div>
-            <div class="role">Biology Teacher, Roosevelt High</div>
+            <div class="role">Biology Teacher · Wayne County</div>
           </div>
         </div>
       </div>
-      
+
       <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
         <div class="stars">★★★★★</div>
         <blockquote>
@@ -1959,11 +1981,11 @@ footer {
           <div class="avatar">SP</div>
           <div>
             <div class="name">Sara P.</div>
-            <div class="role">11th grade, Garfield High</div>
+            <div class="role">11th grade · Oakland County</div>
           </div>
         </div>
       </div>
-      
+
       <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
         <div class="stars">★★★★★</div>
         <blockquote>
@@ -1973,7 +1995,7 @@ footer {
           <div class="avatar">LM</div>
           <div>
             <div class="name">Linda Mwangi</div>
-            <div class="role">Counselor, Beacon Academy</div>
+            <div class="role">Counselor · Macomb County</div>
           </div>
         </div>
       </div>
@@ -1988,14 +2010,14 @@ footer {
       <div class="contact-info" data-aos="fade-right">
         <span class="section-tag">Bring us in</span>
         <h2 class="section-title">Book a Clinically session for your school.</h2>
-        <p class="section-sub">Fill out the form and we'll be in touch within 48 hours. Presentations are free for schools — we just need a classroom and a curious audience.</p>
-        
+        <p class="section-sub">Fill out the form and we'll be in touch within 48 hours. Presentations are free for Michigan schools — we just need a classroom and a curious audience.</p>
+
         <div class="contact-meta">
           <div class="contact-meta-item">
             <div class="icon"><i class="fa-regular fa-envelope"></i></div>
             <div>
               <div class="label">Email us</div>
-              <div class="value">schools@clinically.org</div>
+              <a class="value contact-value" href="/cdn-cgi/l/email-protection#8deee1e4e3e4eeece1e1f4e0e4eee5e4eaece3cdeae0ece4e1a3eee2e0"><span class="__cf_email__" data-cfemail="b4d7d8dddaddd7d5d8d8cdd9ddd7dcddd3d5daf4d3d9d5ddd89ad7dbd9">[email&#160;protected]</span></a>
             </div>
           </div>
           <div class="contact-meta-item">
@@ -2009,44 +2031,44 @@ footer {
             <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
             <div>
               <div class="label">Service area</div>
-              <div class="value">In-person region-wide · Virtual anywhere</div>
+              <div class="value">Metro Detroit, Michigan · In-person only</div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <form class="contact-form" id="bookingForm" data-aos="fade-left" data-aos-delay="100">
         <div class="form-head">
           <h3>School Booking Request</h3>
           <p>All fields marked with <span style="color: var(--coral);">*</span> are required.</p>
         </div>
-        
+
         <div class="form-row">
           <div class="form-group">
-            <label>School name <span class="req">*</span></label>
-            <input type="text" name="school" placeholder="e.g. Lincoln High School" required>
+            <label for="f-school">School name <span class="req">*</span></label>
+            <input id="f-school" type="text" name="school" placeholder="e.g. Novi High School" required>
           </div>
           <div class="form-group">
-            <label>Contact name <span class="req">*</span></label>
-            <input type="text" name="name" placeholder="Your full name" required>
+            <label for="f-name">Contact name <span class="req">*</span></label>
+            <input id="f-name" type="text" name="name" placeholder="Your full name" required>
           </div>
         </div>
-        
+
         <div class="form-row">
           <div class="form-group">
-            <label>Email <span class="req">*</span></label>
-            <input type="email" name="email" placeholder="you@school.edu" required>
+            <label for="f-email">Email <span class="req">*</span></label>
+            <input id="f-email" type="email" name="email" placeholder="you@school.edu" required>
           </div>
           <div class="form-group">
-            <label>Phone (optional)</label>
-            <input type="tel" name="phone" placeholder="(555) 000-0000">
+            <label for="f-phone">Phone (optional)</label>
+            <input id="f-phone" type="tel" name="phone" placeholder="(248) 000-0000">
           </div>
         </div>
-        
+
         <div class="form-row">
           <div class="form-group">
-            <label>Your role <span class="req">*</span></label>
-            <select name="role" required>
+            <label for="f-role">Your role <span class="req">*</span></label>
+            <select id="f-role" name="role" required>
               <option value="">Select your role</option>
               <option>Teacher</option>
               <option>Counselor</option>
@@ -2057,8 +2079,8 @@ footer {
             </select>
           </div>
           <div class="form-group">
-            <label>Audience grade <span class="req">*</span></label>
-            <select name="grade" required>
+            <label for="f-grade">Audience grade <span class="req">*</span></label>
+            <select id="f-grade" name="grade" required>
               <option value="">Select grade range</option>
               <option>9th grade</option>
               <option>10th grade</option>
@@ -2068,49 +2090,33 @@ footer {
             </select>
           </div>
         </div>
-        
+
         <div class="form-row">
           <div class="form-group">
-            <label>Estimated audience size</label>
-            <input type="number" name="size" placeholder="e.g. 30" min="1">
+            <label for="f-city">School city <span class="req">*</span></label>
+            <input id="f-city" type="text" name="city" placeholder="e.g. Wixom, MI" required>
           </div>
           <div class="form-group">
-            <label>Preferred format</label>
-            <select name="format">
-              <option value="">Select format</option>
-              <option>In-person</option>
-              <option>Virtual</option>
-              <option>Either</option>
-            </select>
+            <label for="f-size">Estimated audience size</label>
+            <input id="f-size" type="number" name="size" placeholder="e.g. 30" min="1">
           </div>
         </div>
-        
+
         <div class="form-group">
-          <label>Topic of interest</label>
-          <select name="topic">
-            <option value="">Select a topic (or let us recommend)</option>
-            <option>The Premed Pathway</option>
-            <option>MCAT Demystified</option>
-            <option>Beyond the Books</option>
-            <option>Inside Med School Admissions</option>
-            <option>Specialties Spotlight</option>
-            <option>The Premed Reality Check</option>
-            <option>Q&A with Med Students</option>
-            <option>Custom / Not sure yet</option>
-            <option>Full series (multiple sessions)</option>
-          </select>
+          <label for="f-dates">Preferred dates or timeframe</label>
+          <input id="f-dates" type="text" name="dates" placeholder="e.g. late October, 3rd hour">
         </div>
-        
+
         <div class="form-group">
-          <label>Anything else? (optional)</label>
-          <textarea name="message" placeholder="Preferred dates, special context, specific student questions, etc."></textarea>
+          <label for="f-message">Anything else? (optional)</label>
+          <textarea id="f-message" name="message" placeholder="What you'd like covered, special context, specific student questions, etc."></textarea>
         </div>
-        
+
         <button type="submit" class="form-submit">
           Submit Booking Request
           <i class="fa-solid fa-arrow-right"></i>
         </button>
-        
+
         <p class="form-note">We'll respond within 48 hours to schedule a brief planning call.</p>
       </form>
     </div>
@@ -2125,48 +2131,39 @@ footer {
         <a href="#" class="nav-logo">
           <img src="logo.svg" alt="Clinically" class="nav-logo-img footer-logo-img">
         </a>
-        <p>A youth-led initiative bringing premed education into classrooms — making the path to medicine clear, honest, and possible for every student.</p>
+        <p>A youth-led initiative bringing premed education into Metro Detroit classrooms — making the path to medicine clear, honest, and possible for every student.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.instagram.com/clin_ically/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Clinically on Instagram"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
           <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
-      
+
       <div class="footer-col">
         <h4>Programs</h4>
         <ul>
           <li><a href="#what">In-School Talks</a></li>
-          <li><a href="#what">Mentorship</a></li>
+          <li><a href="#what">Course Tracks</a></li>
           <li><a href="#what">Resource Library</a></li>
           <li><a href="#what">Med Student Panels</a></li>
         </ul>
       </div>
-      
-      <div class="footer-col">
-        <h4>Topics</h4>
-        <ul>
-          <li><a href="#topics">Premed Pathway</a></li>
-          <li><a href="#topics">MCAT Demystified</a></li>
-          <li><a href="#topics">Admissions</a></li>
-          <li><a href="#topics">Reality Check</a></li>
-        </ul>
-      </div>
-      
+
       <div class="footer-col">
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="mailto:schools@clinically.org">schools@clinically.org</a></li>
-          <li><a href="#">Partner with us</a></li>
-          <li><a href="#">Volunteer</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#cba8a7a2a5a2a8aaa7a7b2a6a2a8a3a2acaaa58baca6aaa2a7e5a8a4a6"><span class="__cf_email__" data-cfemail="1a7976737473797b76766377737972737d7b745a7d777b737634797577">[email&#160;protected]</span></a></li>
+          <li><a href="#area">Service area</a></li>
+          <li><a href="#contact">Partner with us</a></li>
+          <li><a href="#contact">Volunteer</a></li>
         </ul>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
-      <div>© 2025 Clinically. A nonprofit educational initiative.</div>
+      <div>Clinically — a nonprofit educational initiative serving Metro Detroit, Michigan.</div>
       <div>Made with care for the next generation of doctors.</div>
     </div>
   </div>
@@ -2178,111 +2175,234 @@ footer {
   <span id="toastMessage">Request received — we'll be in touch within 48 hours.</span>
 </div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-// Initialize AOS fade animations
-AOS.init({
-  duration: 800,
-  easing: 'ease-out-cubic',
-  once: true,
-  offset: 80
-});
+(function () {
+  'use strict';
 
-// Scroll progress bar
-const scrollBar = document.getElementById('scrollBar');
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = (scrollTop / docHeight) * 100;
-  scrollBar.style.width = pct + '%';
-}, { passive: true });
-
-// Form submission with validation + toast
-const form = document.getElementById('bookingForm');
-const toast = document.getElementById('toast');
-const toastMessage = document.getElementById('toastMessage');
-const toastIcon = toast.querySelector('.icon i');
-
-function showToast(message, isError = false) {
-  toastMessage.textContent = message;
-  toast.classList.toggle('error', isError);
-  toastIcon.className = isError ? 'fa-solid fa-exclamation' : 'fa-solid fa-check';
-  toast.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4000);
-}
-
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  
-  const required = form.querySelectorAll('[required]');
-  let valid = true;
-  let firstInvalid = null;
-  
-  required.forEach(field => {
-    if (!field.value.trim()) {
-      field.style.borderColor = 'var(--coral)';
-      if (!firstInvalid) firstInvalid = field;
-      valid = false;
-    } else {
-      field.style.borderColor = '';
-    }
-  });
-  
-  if (!valid) {
-    showToast('Please fill in all required fields.', true);
-    firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
+  /* ---------------------------------------------------------
+     AOS — guarded so a blocked/failed CDN never kills the rest
+     of the page's JavaScript (this was breaking the marquee).
+  --------------------------------------------------------- */
+  if (window.AOS && typeof window.AOS.init === 'function') {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 80
+    });
+  } else {
+    document.querySelectorAll('[data-aos]').forEach(function (el) {
+      el.removeAttribute('data-aos');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
   }
-  
-  const schoolName = form.querySelector('[name="school"]').value;
-  showToast(`Request received from ${schoolName} — we'll be in touch within 48 hours.`);
-  form.reset();
-});
 
-// Reset border on input
-form.querySelectorAll('input, select, textarea').forEach(field => {
-  field.addEventListener('input', () => {
-    field.style.borderColor = '';
-  });
-  field.addEventListener('change', () => {
-    field.style.borderColor = '';
-  });
-});
-
-// Smooth scroll for in-page anchors with nav offset
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const href = this.getAttribute('href');
-    if (href === '#' || href.length <= 1) return;
-    const target = document.querySelector(href);
-    if (target) {
-      e.preventDefault();
-      const offset = 90;
-      const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
+  /* ---------------------------------------------------------
+     MARQUEE — speed scales with content width so the loop
+     runs at a constant px/sec no matter the viewport.
+  --------------------------------------------------------- */
+  var track = document.getElementById('marqueeTrack');
+  if (track) {
+    var setMarqueeSpeed = function () {
+      var group = track.querySelector('.marquee-group');
+      if (!group) return;
+      var width = group.getBoundingClientRect().width;
+      if (!width) return;
+      var pxPerSecond = 60;
+      track.style.animationDuration = (width / pxPerSecond).toFixed(2) + 's';
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setMarqueeSpeed).catch(function () {});
     }
-  });
-});
+    window.addEventListener('load', setMarqueeSpeed);
+    window.addEventListener('resize', setMarqueeSpeed, { passive: true });
+    setMarqueeSpeed();
+  }
 
-// Magnetic hover effect on primary buttons
-document.querySelectorAll('.btn-primary, .nav-cta, .form-submit').forEach(btn => {
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    btn.style.transform = `translate(${x * 0.12}px, ${y * 0.2}px)`;
+  /* --------------------------- SCROLL PROGRESS --------------------------- */
+  var scrollBar = document.getElementById('scrollBar');
+  var updateProgress = function () {
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    scrollBar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  };
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ------------------------------- TOAST -------------------------------- */
+  var toast = document.getElementById('toast');
+  var toastMessage = document.getElementById('toastMessage');
+  var toastIcon = toast.querySelector('.icon i');
+  var toastTimer;
+
+  function showToast(message, isError) {
+    toastMessage.textContent = message;
+    toast.classList.toggle('error', !!isError);
+    if (toastIcon) toastIcon.className = isError ? 'fa-solid fa-exclamation' : 'fa-solid fa-check';
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  /* ------------------------------- FORM --------------------------------- */
+  var form = document.getElementById('bookingForm');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var required = form.querySelectorAll('[required]');
+    var valid = true;
+    var firstInvalid = null;
+
+    required.forEach(function (field) {
+      if (!field.value.trim()) {
+        field.style.borderColor = 'var(--coral)';
+        if (!firstInvalid) firstInvalid = field;
+        valid = false;
+      } else {
+        field.style.borderColor = '';
+      }
+    });
+
+    if (!valid) {
+      showToast('Please fill in all required fields.', true);
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    var schoolName = form.querySelector('[name="school"]').value;
+    showToast('Request received from ' + schoolName + ' — we\'ll be in touch within 48 hours.');
+    form.reset();
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
+
+  form.querySelectorAll('input, select, textarea').forEach(function (field) {
+    var clear = function () { field.style.borderColor = ''; };
+    field.addEventListener('input', clear);
+    field.addEventListener('change', clear);
   });
-});
+
+  /* ------------------------ SMOOTH ANCHOR SCROLL ------------------------ */
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (!href || href === '#' || href.length <= 1) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var offset = 90;
+      var targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    });
+  });
+
+  /* -------------------------- MAGNETIC BUTTONS --------------------------
+     Proximity-based: the cursor pulls a button from up to ~70px away,
+     the label drifts slightly further, and everything springs back.
+     Driven by one document-level pointermove on a rAF, so positions stay
+     correct while scrolling and it costs nothing when the mouse is idle.
+  ----------------------------------------------------------------------- */
+  var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (finePointer && !reducedMotion) {
+    var magnets = [];
+    document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta, .form-submit').forEach(function (el) {
+      el.classList.add('magnetic');
+      var inner = document.createElement('span');
+      inner.className = 'magnetic-inner';
+      while (el.firstChild) { inner.appendChild(el.firstChild); }
+      el.appendChild(inner);
+      magnets.push({ el: el, inner: inner, pulled: false });
+    });
+
+    var pointerX = -9999, pointerY = -9999;
+    var queued = false;
+    var PAD_X = 70;   /* how far outside the button the field reaches */
+    var PAD_Y = 45;
+    var STRENGTH = 0.32;
+    var MAX_SHIFT = 16;
+
+    var clamp = function (v, limit) {
+      return Math.max(-limit, Math.min(limit, v));
+    };
+
+    var release = function (m) {
+      if (!m.pulled) return;
+      m.pulled = false;
+      m.el.classList.remove('is-pulled');
+      m.el.style.transform = '';
+      m.inner.style.transform = '';
+    };
+
+    var update = function () {
+      queued = false;
+      for (var i = 0; i < magnets.length; i++) {
+        var m = magnets[i];
+        var r = m.el.getBoundingClientRect();
+
+        /* offscreen or hidden (e.g. nav links on mobile) */
+        if (!r.width || r.bottom < -200 || r.top > window.innerHeight + 200) {
+          release(m);
+          continue;
+        }
+
+        var dx = pointerX - (r.left + r.width / 2);
+        var dy = pointerY - (r.top + r.height / 2);
+        var reachX = r.width / 2 + PAD_X;
+        var reachY = r.height / 2 + PAD_Y;
+        var dist = Math.sqrt((dx / reachX) * (dx / reachX) + (dy / reachY) * (dy / reachY));
+
+        if (dist <= 1) {
+          var falloff = 1 - dist * 0.45;           /* softer at the edge of the field */
+          var tx = clamp(dx * STRENGTH * falloff, MAX_SHIFT);
+          var ty = clamp(dy * STRENGTH * falloff, MAX_SHIFT);
+          if (!m.pulled) {
+            m.pulled = true;
+            m.el.classList.add('is-pulled');
+          }
+          m.el.style.transform = 'translate3d(' + tx.toFixed(2) + 'px, ' + (ty - 2).toFixed(2) + 'px, 0)';
+          m.inner.style.transform = 'translate3d(' + (tx * 0.32).toFixed(2) + 'px, ' + (ty * 0.32).toFixed(2) + 'px, 0)';
+        } else {
+          release(m);
+        }
+      }
+    };
+
+    var queueUpdate = function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      pointerX = e.clientX;
+      pointerY = e.clientY;
+      queueUpdate();
+    }, { passive: true });
+
+    /* keep the field aligned while the page moves under the cursor */
+    window.addEventListener('scroll', queueUpdate, { passive: true });
+    window.addEventListener('resize', queueUpdate, { passive: true });
+
+    document.addEventListener('pointerleave', function () {
+      pointerX = -9999;
+      pointerY = -9999;
+      queueUpdate();
+    });
+    window.addEventListener('blur', function () {
+      pointerX = -9999;
+      pointerY = -9999;
+      queueUpdate();
+    });
+  }
+})();
 </script>
 
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d1cc204ba553a7',t:'MTc4NzA2NTMyMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
