@@ -1000,6 +1000,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   font-style: italic;
 }
 .form-note { text-align: center; font-size: 11.5px; color: var(--ink-2); margin-top: 14px; opacity: 0.85; }
+.submit:disabled { opacity: 0.55; cursor: wait; }
 
 /* FOOTER */
 .foot {
@@ -1553,7 +1554,7 @@ We're making it readable.</h2>
             <span class="bx"><svg class="ico"><use href="#i-mail"></use></svg></span>
             <div class="txt">
               <span class="k">Email us</span>
-              <a class="v" href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a>
+              <a class="v" href="/cdn-cgi/l/email-protection#b1d2ddd8dfd8d2d0ddddc8dcd8d2d9d8d6d0dff1d6dcd0d8dd9fd2dedc"><span class="__cf_email__" data-cfemail="7b1817121512181a17170216121813121c1a153b1c161a121755181416">[email&#160;protected]</span></a>
             </div>
           </div>
           <div class="meta-row">
@@ -1648,6 +1649,12 @@ We're making it readable.</h2>
           <textarea id="f-msg" name="message" placeholder="What you'd like covered, special context, specific student questions, etc."></textarea>
         </div>
 
+        <!-- honeypot: hidden from humans, catches bots -->
+        <div class="field" aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px;">
+          <label for="f-company">Company (leave blank)</label>
+          <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
         <button type="submit" class="btn btn-ink submit">
           Submit Booking Request
           <svg class="ico" style="font-size:17px"><use href="#i-arrow"></use></svg>
@@ -1688,7 +1695,7 @@ We're making it readable.</h2>
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#c5a6a9acabaca6a4a9a9bca8aca6adaca2a4ab85a2a8a4aca9eba6aaa8"><span class="__cf_email__" data-cfemail="2d4e414443444e4c41415440444e45444a4c436d4a404c4441034e4240">[email&#160;protected]</span></a></li>
           <li><a href="#area">Service area</a></li>
           <li><a href="#contact">Partner with us</a></li>
           <li><a href="#contact">Volunteer</a></li>
@@ -1708,7 +1715,7 @@ We're making it readable.</h2>
   <span id="toastText">Request received — we'll be in touch within 48 hours.</span>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
   'use strict';
 
@@ -1865,6 +1872,11 @@ We're making it readable.</h2>
 
   /* ---------------- booking form ---------------- */
   var form = document.getElementById('bookingForm');
+  // Backend: Google Apps Script web app (see form-backend/README.md).
+  // If you ever switch backends: Formspree → FORM_JSON = false (FormData body).
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgnja3E0yG3HMRnpOoV9Q_oLBDWXuxRU4cQ5meof4qBqyK-rhO4AwiIaAQKB0UQv1olg/exec';
+  var FORM_JSON = true;
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var bad = null;
@@ -1890,8 +1902,37 @@ We're making it readable.</h2>
       bad.focus({ preventScroll: true });
       return;
     }
-    popToast('Request received from ' + form.querySelector('[name="school"]').value + " — we'll be in touch within 48 hours.");
-    form.reset();
+    // honeypot — silently drop bot submissions
+    if (form.company && form.company.value) { form.reset(); return; }
+
+    if (!FORM_ENDPOINT) {
+      popToast('This form is not connected to a backend yet — email clinicallymichigan@gmail.com.', true);
+      return;
+    }
+
+    var payload = {};
+    new FormData(form).forEach(function (v, k) { payload[k] = v; });
+    var btn = form.querySelector('.submit');
+    btn.disabled = true;
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: FORM_JSON ? {} : { 'Accept': 'application/json' },
+      body: FORM_JSON ? JSON.stringify(payload) : new FormData(form)
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json().catch(function () { return {}; }); // Apps Script replies {"ok":true|false}
+      })
+      .then(function (res) {
+        if (res && res.ok === false) throw new Error(res.error || 'Request rejected');
+        popToast('Request received from ' + payload.school + " — we'll be in touch within 48 hours.");
+        form.reset();
+      })
+      .catch(function () {
+        popToast('Could not send — please email clinicallymichigan@gmail.com.', true);
+      })
+      .then(function () { btn.disabled = false; });
   });
   form.querySelectorAll('input, select, textarea').forEach(function (f) {
     var clear = function () { f.style.borderColor = ''; };
@@ -1956,5 +1997,5 @@ We're making it readable.</h2>
     window.addEventListener('blur', function () { px = -9999; py = -9999; queue(); });
   }
 })();
-</script></body>
+</script><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2d27fb4899c323c',t:'MTc4NzA3MjY3OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
