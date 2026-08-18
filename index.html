@@ -11,9 +11,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   CLINICALLY — v2
-   Same green palette, rebuilt layout: editorial grid, squared
-   geometry, logo-forward masthead. Zero external JS/CSS/icons.
+   CLINICALLY — v3
+   Hero rebuilt: cream editorial, paper session ticket.
+   Everything below the marquee is unchanged in spirit.
    ============================================================ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -263,62 +263,53 @@ a { color: inherit; }
 .masthead.is-open .drawer { display: block; }
 
 /* ============================================================
-   HERO
+   HERO — light editorial + paper session ticket
    ============================================================ */
 .hero {
   position: relative;
-  background:
-    radial-gradient(70% 90% at 82% 8%, rgba(83, 157, 150, 0.55), transparent 62%),
-    radial-gradient(55% 70% at 8% 92%, rgba(205, 255, 216, 0.18), transparent 60%),
-    linear-gradient(158deg, #0a2622 0%, #123531 48%, #1f4d49 100%);
-  color: var(--cream);
-  padding: clamp(7.5rem, 11.5vh, 9.5rem) 0 clamp(2.75rem, 4.5vw, 4rem);
+  isolation: isolate;
+  color: var(--ink);
+  background: var(--cream);
+  padding: clamp(6.9rem, 11vh, 9.2rem) 0 clamp(2.6rem, 4.4vw, 3.6rem);
   overflow: hidden;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(205, 255, 216, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(205, 255, 216, 0.055) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 85%);
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 30%, transparent 85%);
-  pointer-events: none;
-}
-.hero-plus {
-  position: absolute;
-  color: rgba(205, 255, 216, 0.22);
-  font-weight: 800;
-  font-style: italic;
-  user-select: none;
-  pointer-events: none;
-  animation: bob 9s ease-in-out infinite;
-}
-@keyframes bob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-18px) rotate(12deg); }
-}
-.hero .shell { position: relative; z-index: 2; }
 
-.tag {
+.hero-rule {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1.5px;
+  background: var(--ink);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  gap: clamp(2rem, 4.4vw, 4.75rem);
+  align-items: end;
+}
+
+.hero-kicker {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  padding: 9px 18px;
-  border: 1.5px solid var(--line-dark);
+  gap: 10px;
+  padding: 7px 14px 7px 11px;
   border-radius: 100px;
-  background: rgba(205, 255, 216, 0.06);
-  font-size: 12.5px;
+  background: var(--paper);
+  border: 1.5px solid var(--line-strong);
+  font-size: 12px;
   font-weight: 700;
-  color: var(--mint);
-  margin-bottom: 26px;
+  color: var(--ink);
+  margin-bottom: clamp(18px, 2.2vw, 26px);
+  box-shadow: 3px 3px 0 var(--mint);
 }
 .dot {
-  width: 8px; height: 8px;
-  background: var(--coral);
+  width: 7px; height: 7px;
   border-radius: 50%;
+  background: var(--coral);
   position: relative;
   flex-shrink: 0;
 }
@@ -328,162 +319,277 @@ a { color: inherit; }
   inset: -5px;
   border-radius: 50%;
   background: var(--coral);
-  opacity: 0.45;
-  animation: ping 2.2s ease-out infinite;
+  opacity: 0.4;
+  animation: ping 2.4s ease-out infinite;
 }
 @keyframes ping {
-  0% { transform: scale(0.9); opacity: 0.55; }
+  0% { transform: scale(0.85); opacity: 0.5; }
   100% { transform: scale(2.6); opacity: 0; }
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  align-items: center;
-  gap: clamp(2rem, 4.5vw, 4.5rem);
+.hero h1 {
+  font-size: clamp(2.55rem, 5.15vw, 4.7rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.94;
+  letter-spacing: -0.042em;
+  color: var(--ink);
+  margin-bottom: 22px;
+  max-width: 13.2ch;
 }
-.hero h1 { margin-bottom: 22px; color: var(--cream); }
-.hero h1 em { color: var(--mint); }
-.hero-lede { margin-bottom: 34px; }
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal);
+}
 
-.actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 38px; }
+.hero-lede {
+  font-size: clamp(0.98rem, 1.12vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: var(--ink-2);
+  max-width: 46ch;
+  margin-bottom: clamp(24px, 2.8vw, 32px);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(22px, 2.6vw, 30px);
+}
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 16px 28px;
+  padding: 15px 26px;
   font-family: inherit;
   font-size: 14.5px;
   font-weight: 800;
   text-decoration: none;
-  border-radius: var(--r-sm);
-  border: 1.5px solid transparent;
+  border-radius: 10px;
+  border: 1px solid transparent;
   cursor: pointer;
 }
-.btn-solid {
+.btn-mint {
   background: var(--mint);
   color: var(--ink);
-  border-color: var(--mint);
-  box-shadow: var(--shadow-hard);
+  border-color: var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
 }
-.btn-solid:hover { background: var(--paper); border-color: var(--paper); }
-.btn-line {
-  background: transparent;
-  color: var(--cream);
-  border-color: rgba(244, 251, 245, 0.45);
+.btn-mint:hover { background: #ffffff; }
+.btn-quiet {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink);
 }
-.btn-line:hover { border-color: var(--mint); color: var(--mint); }
+.btn-quiet:hover {
+  background: var(--mint);
+}
 .btn-ink {
   background: var(--ink);
   color: var(--mint);
   border-color: var(--ink);
-  box-shadow: var(--shadow-hard-mint);
+  box-shadow: 6px 6px 0 var(--mint);
 }
 .btn-ink:hover { background: var(--teal-deep); border-color: var(--teal-deep); }
 
-.trust {
+.hero-facts {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
-.trust span {
+.hero-facts li {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font-size: 12.5px;
+  gap: 8px;
+  font-size: 12.4px;
   font-weight: 700;
-  color: var(--cream);
-  border: 1.5px solid var(--line-dark);
-  border-radius: 100px;
-  padding: 9px 16px;
-}
-.trust .ico { color: var(--mint); font-size: 15px; }
-
-/* session card */
-.card {
+  color: var(--teal-deep);
   background: var(--paper);
-  color: var(--ink);
-  border-radius: var(--r-lg);
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  padding: 8px 14px;
+}
+.hero-facts .ico { color: var(--teal); font-size: 15px; }
+
+/* ---------- session ticket ---------- */
+.ticket {
+  position: relative;
+  background: var(--paper);
   border: 1.5px solid var(--ink);
-  box-shadow: 10px 10px 0 rgba(205, 255, 216, 0.28);
+  border-radius: 18px;
+  box-shadow: 8px 8px 0 var(--ink);
   overflow: hidden;
 }
-.card-top {
+.ticket-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
+  padding: 18px 22px 16px;
+  background: var(--mint);
+  border-bottom: 1.5px solid var(--ink);
+}
+.ticket-k {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 6px;
+}
+.ticket-head strong {
+  display: block;
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.ticket-time {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+  padding: 8px 11px;
   background: var(--ink);
   color: var(--mint);
-  padding: 16px 22px;
+  border-radius: 10px;
 }
-.card-top .k {
-  font-size: 11px;
+.ticket-time b {
+  font-size: 15px;
+  font-style: italic;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.ticket-time span {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  opacity: 0.72;
 }
-.card-top .v {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  font-weight: 800;
-  background: var(--mint);
-  color: var(--ink);
-  padding: 5px 12px;
-  border-radius: 100px;
-  white-space: nowrap;
-}
-.card-body { padding: clamp(1.25rem, 2vw, 1.75rem); }
 
-.mini-title {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--teal-deep);
-  margin-bottom: 16px;
-}
-.incl { display: grid; gap: 14px; margin-bottom: 24px; }
-.incl-row { display: flex; gap: 14px; align-items: flex-start; }
-.incl-row .bx {
-  width: 38px; height: 38px;
+.ticket-body { padding: 8px 10px 10px; }
+
+.ticket-inc {
+  list-style: none;
   display: grid;
-  place-items: center;
-  background: var(--mint);
-  border-radius: 10px;
-  font-size: 17px;
-  color: var(--teal-deep);
-  flex-shrink: 0;
+  gap: 2px;
 }
-.incl-row .txt { min-width: 0; }
-.incl-row b { display: block; font-size: 14px; }
-.incl-row p { font-size: 12.8px; color: var(--ink-2); line-height: 1.45; }
+.ticket-inc li {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 12px 13px;
+  border-radius: 12px;
+}
+.ticket-inc li + li {
+  border-top: 1px dashed var(--line);
+  border-radius: 0;
+}
+.ticket-inc .n {
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--teal);
+  padding-top: 2px;
+}
+.ticket-inc b {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+.ticket-inc p {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
 
-.track { display: grid; gap: 8px; border-top: 1.5px dashed var(--line); padding-top: 20px; }
-.track-row {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 11px 14px;
+.ticket-path {
+  margin: 6px 10px 10px;
+  padding: 16px 16px 14px;
+  background: var(--cream);
   border: 1.5px solid var(--line);
-  border-radius: 10px;
-  font-size: 12.8px;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  border-radius: 14px;
 }
-.track-row:hover { transform: translateX(4px); border-color: var(--teal); }
-.track-row .n { font-weight: 800; font-style: italic; color: var(--teal); }
-.track-row .t { font-weight: 700; }
-.track-row .m { margin-left: auto; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; }
-.track-row.done { opacity: 0.55; }
-.track-row.done .t { text-decoration: line-through; }
-.track-row.now {
-  background: var(--mint);
+.ticket-path .lab {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  margin-bottom: 14px;
+}
+.path-rail {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.path-rail::before {
+  content: '';
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 7px;
+  height: 2px;
+  background: var(--ink);
+  opacity: 0.16;
+}
+.path-rail li {
+  position: relative;
+  text-align: center;
+  padding-top: 22px;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--ink-2);
+}
+.path-rail li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  z-index: 1;
+}
+.path-rail li.is-now {
+  color: var(--ink);
+  font-weight: 800;
+}
+.path-rail li.is-now::before {
+  background: var(--coral);
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(255, 122, 139, 0.22);
+}
+.path-rail li.is-done::before {
+  background: var(--teal);
   border-color: var(--ink);
 }
-.track-row.now .n { color: var(--coral); }
+.path-rail small {
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-top: 3px;
+}
 
 /* ============================================================
    MARQUEE
@@ -1033,7 +1139,8 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   .nav { display: none; }
   .burger { display: flex; }
   .nav-cta { display: none; }
-  .hero-grid { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; align-items: start; }
+  .hero h1 { max-width: 16ch; }
   .why-wrap, .area-wrap, .contact-wrap { grid-template-columns: 1fr; }
   .quote { position: static; }
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -1043,20 +1150,17 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   .foot-brand { grid-column: 1 / -1; }
 }
 
-@media (max-width: 1080px) {
-  .hero-grid { align-items: start; }
-}
-
 @media (max-width: 720px) {
   .hero { padding-top: clamp(5.5rem, 13vh, 7rem); }
-  .hero-plus { display: none; }
-  .actions { flex-direction: column; align-items: stretch; }
+  .hero h1 { max-width: none; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
   .btn { justify-content: center; }
+  .ticket-head { flex-direction: column; }
+  .ticket-time { align-items: flex-start; }
   .pair { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; }
   .why-item { flex-direction: column; gap: 14px; }
-  .card-top { flex-direction: row; }
   .foot-mark { flex-direction: column; text-align: left; }
 }
 </style>
@@ -1136,83 +1240,85 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
 </header>
 
 <!-- ===================== HERO ===================== -->
-<section class="hero on-dark" id="top">
-  <span class="hero-plus" style="top:22%; left:50.5%; font-size:44px;">+</span>
-  <span class="hero-plus" style="top:68%; left:51.5%; font-size:26px; animation-delay:1.4s;">+</span>
-  <span class="hero-plus" style="bottom:5%; left:2%; font-size:30px; animation-delay:2.4s;">+</span>
-  <span class="hero-plus" style="top:14%; left:1.5%; font-size:20px; animation-delay:3.1s;">+</span>
+<section class="hero" id="top">
+  <div class="hero-rule" aria-hidden="true"></div>
 
-  <div class="shell">
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <span class="hero-kicker">
+        <span class="dot"></span>
+        Now booking Metro Detroit schools for 2026–2027
+      </span>
 
-    <div class="hero-grid">
-      <div>
-        <div class="tag">
-          <span class="dot"></span>
-          Now booking Metro Detroit schools for 2026–2027
+      <h1>We bring the road to medicine <em>into your classroom.</em></h1>
+
+      <p class="hero-lede">
+        Clinically is a youth-led initiative delivering premed education directly to high schools across Metro Detroit — turning curiosity about medicine into a clear, actionable path forward for the next generation of doctors.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-mint">
+          Bring Clinically to Your School
+          <svg class="ico" style="font-size:17px"><use href="#i-arrow"></use></svg>
+        </a>
+        <a href="#what" class="btn btn-quiet">See What We Cover</a>
+      </div>
+
+      <ul class="hero-facts">
+        <li><svg class="ico"><use href="#i-school"></use></svg> Free for schools</li>
+        <li><svg class="ico"><use href="#i-pin"></use></svg> In person, Metro Detroit</li>
+        <li><svg class="ico"><use href="#i-cap"></use></svg> Grades 9–12</li>
+      </ul>
+    </div>
+
+    <aside class="ticket" aria-label="Session overview">
+      <div class="ticket-head">
+        <div>
+          <p class="ticket-k">Session overview</p>
+          <strong>One class period.<br>The whole pathway.</strong>
         </div>
-
-        <h1 class="h-xl">We bring the road to medicine <em>into your classroom.</em></h1>
-
-        <p class="lede hero-lede">
-          Clinically is a youth-led initiative delivering premed education directly to high schools across Metro Detroit — turning curiosity about medicine into a clear, actionable path forward for the next generation of doctors.
-        </p>
-
-        <div class="actions">
-          <a href="#contact" class="btn btn-solid">
-            Bring Clinically to Your School
-            <svg class="ico" style="font-size:17px"><use href="#i-arrow"></use></svg>
-          </a>
-          <a href="#what" class="btn btn-line">See What We Cover</a>
-        </div>
-
-        <div class="trust">
-          <span><svg class="ico"><use href="#i-school"></use></svg> Free for schools</span>
-          <span><svg class="ico"><use href="#i-pin"></use></svg> In person, Metro Detroit</span>
-          <span><svg class="ico"><use href="#i-cap"></use></svg> Grades 9–12</span>
+        <div class="ticket-time">
+          <b>45–60</b>
+          <span>minutes</span>
         </div>
       </div>
 
-      <aside class="card">
-        <div class="card-top">
-          <span class="k">Session Overview</span>
-          <span class="v"><svg class="ico" style="font-size:14px"><use href="#i-clock"></use></svg> 45–60 mins</span>
-        </div>
-        <div class="card-body">
-          <div class="mini-title">What's included</div>
+      <div class="ticket-body">
+        <ul class="ticket-inc">
+          <li>
+            <span class="n">01</span>
+            <div>
+              <b>Interactive Q&amp;A</b>
+              <p>Students ask real questions and get honest answers from current premeds.</p>
+            </div>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <div>
+              <b>Printed Roadmaps</b>
+              <p>Every student leaves with a physical, step-by-step premed timeline.</p>
+            </div>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <div>
+              <b>Course Access</b>
+              <p>Interested students get our curated college and admissions tracks.</p>
+            </div>
+          </li>
+        </ul>
 
-          <div class="incl">
-            <div class="incl-row">
-              <span class="bx"><svg class="ico"><use href="#i-chat"></use></svg></span>
-              <div class="txt">
-                <b>Interactive Q&amp;A</b>
-                <p>Students ask real questions and get honest answers from current premeds.</p>
-              </div>
-            </div>
-            <div class="incl-row">
-              <span class="bx"><svg class="ico"><use href="#i-doc"></use></svg></span>
-              <div class="txt">
-                <b>Printed Roadmaps</b>
-                <p>Every student leaves with a physical, step-by-step premed timeline.</p>
-              </div>
-            </div>
-            <div class="incl-row">
-              <span class="bx"><svg class="ico"><use href="#i-list"></use></svg></span>
-              <div class="txt">
-                <b>Course Access</b>
-                <p>Interested students get access to our curated college and admissions course tracks.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="track">
-            <div class="track-row done"><span class="n">01</span><span class="t">High School</span><span class="m">Completed</span></div>
-            <div class="track-row now"><span class="n">02</span><span class="t">Premed Pathway</span><span class="m">In session</span></div>
-            <div class="track-row"><span class="n">03</span><span class="t">Medical School</span><span class="m">Upcoming</span></div>
-            <div class="track-row"><span class="n">04</span><span class="t">Residency &amp; Beyond</span><span class="m">Future</span></div>
-          </div>
+        <div class="ticket-path">
+          <p class="lab">The road we map</p>
+          <ol class="path-rail">
+            <li class="is-done">High School</li>
+            <li class="is-now">Premed<small>in session</small></li>
+            <li>Med School</li>
+            <li>Residency</li>
+          </ol>
         </div>
-      </aside>
-    </div>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -1278,7 +1384,8 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   <div class="shell">
     <div class="sec-head" data-reveal>
       <span class="eyebrow">Why it matters</span>
-      <h2 class="h-lg">The premed path is <em>opaque.</em><br>We're making it readable.</h2>
+      <h2 class="h-lg">The premed path is <em>opaque.</em>
+We're making it readable.</h2>
       <p class="lede">Most high school students interested in medicine have no access to premed advising. The result? Talented students — especially those from underrepresented backgrounds — walk away from the path before they even start.</p>
     </div>
 
@@ -1356,7 +1463,8 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
     <div class="area-wrap">
       <div data-reveal>
         <span class="eyebrow">Where we go</span>
-        <h2 class="h-lg">Michigan only.<br><em>In person, always.</em></h2>
+        <h2 class="h-lg">Michigan only.
+<em>In person, always.</em></h2>
         <p class="lede" style="margin-top:18px">Clinically is based in Metro Detroit, and every session is delivered face-to-face in your building. We don't run virtual or online presentations — the conversations that change a student's mind happen in the room.</p>
         <div class="area-badge">
           <svg class="ico"><use href="#i-pin"></use></svg>
@@ -1442,7 +1550,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
             <span class="bx"><svg class="ico"><use href="#i-mail"></use></svg></span>
             <div class="txt">
               <span class="k">Email us</span>
-              <a class="v" href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a>
+              <a class="v" href="mailto:hello@clinically.org">hello@clinically.org</a>
             </div>
           </div>
           <div class="meta-row">
@@ -1577,7 +1685,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
         <h4>Get in touch</h4>
         <ul>
           <li><a href="#contact">Book a session</a></li>
-          <li><a href="mailto:clinicallymichigan@gmail.com">clinicallymichigan@gmail.com</a></li>
+          <li><a href="mailto:hello@clinically.org">hello@clinically.org</a></li>
           <li><a href="#area">Service area</a></li>
           <li><a href="#contact">Partner with us</a></li>
           <li><a href="#contact">Volunteer</a></li>
@@ -1607,7 +1715,7 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   var revealables = document.querySelectorAll('[data-reveal]');
   if ('IntersectionObserver' in window && !reduced) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry, i) {
+      entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
         var el = entry.target;
         var siblings = Array.prototype.slice.call(el.parentNode.children).indexOf(el);
@@ -1790,6 +1898,5 @@ a.v:hover { color: var(--teal-deep); text-decoration: underline; }
   }
 })();
 </script>
-
 </body>
 </html>
